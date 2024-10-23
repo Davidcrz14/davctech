@@ -727,13 +727,819 @@ if ($numeros[0] > $numeros[1] && $numeros[1] < $numeros[2]) {
     </div>
 </div>
 
+<!-- leccion 3-->
+ <!-- Lección 3: Estructuras de Control en PHP -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 3: Estructuras de Control en PHP</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Sección: Sentencias Condicionales -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Sentencias Condicionales</h3>
+            <p class="text-gray-300 mb-4">Las sentencias condicionales nos permiten ejecutar diferentes bloques de código según se cumplan o no ciertas condiciones.</p>
+
+            <!-- Subsección: if -->
+            <h4 class="text-lg text-green-400 mb-2">La sentencia if</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_if.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$edad = 20;
+
+if ($edad >= 18) {
+    echo "Eres mayor de edad";
+}
+?&gt;</pre>
+            </div>
+
+            <!-- Subsección: if-else -->
+            <h4 class="text-lg text-green-400 mb-2 mt-4">La sentencia if-else</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_if_else.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$edad = 16;
+
+if ($edad >= 18) {
+    echo "Eres mayor de edad";
+} else {
+    echo "Eres menor de edad";
+}
+?&gt;</pre>
+            </div>
+
+            <!-- Subsección: elseif -->
+            <h4 class="text-lg text-green-400 mb-2 mt-4">La sentencia elseif</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_elseif.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$nota = 85;
+
+if ($nota >= 90) {
+    echo "Excelente";
+} elseif ($nota >= 70) {
+    echo "Aprobado";
+} else {
+    echo "Reprobado";
+}
+?&gt;</pre>
+            </div>
+
+            <!-- Subsección: switch -->
+            <h4 class="text-lg text-green-400 mb-2 mt-4">La sentencia switch</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_switch.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$dia = "lunes";
+
+switch ($dia) {
+    case "lunes":
+        echo "Es lunes";
+        break;
+    case "martes":
+        echo "Es martes";
+        break;
+    default:
+        echo "Es otro día";
+}
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Bucles -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Bucles</h3>
+            <p class="text-gray-300 mb-4">Los bucles nos permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición.</p>
+
+            <!-- Subsección: for -->
+            <h4 class="text-lg text-green-400 mb-2">El bucle for</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_for.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+for ($i = 1; $i <= 5; $i++) {
+    echo "Iteración número: $i&lt;br&gt;";
+}
+?&gt;</pre>
+            </div>
+
+            <!-- Subsección: while -->
+            <h4 class="text-lg text-green-400 mb-2 mt-4">El bucle while</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_while.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$i = 1;
+
+while ($i <= 5) {
+    echo "Iteración número: $i&lt;br&gt;";
+    $i++;
+}
+?&gt;</pre>
+            </div>
+
+            <!-- Subsección: do-while -->
+            <h4 class="text-lg text-green-400 mb-2 mt-4">El bucle do-while</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_do_while.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$i = 6;
+
+do {
+    echo "Iteración número: $i&lt;br&gt;";
+    $i++;
+} while ($i <= 5);
+?&gt;</pre>
+            </div>
+
+            <!-- Subsección: foreach -->
+            <h4 class="text-lg text-green-400 mb-2 mt-4">El bucle foreach</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_foreach.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$colores = array("rojo", "verde", "azul");
+
+foreach ($colores as $color) {
+    echo "El color es: $color&lt;br&gt;";
+}
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Control de Flujo -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Control de Flujo con break y continue</h3>
+            <p class="text-gray-300 mb-4">Las sentencias break y continue nos permiten controlar el flujo de los bucles.</p>
+
+            <!-- Subsección: break -->
+            <h4 class="text-lg text-green-400 mb-2">La sentencia break</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_break.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+for ($i = 1; $i <= 10; $i++) {
+    if ($i == 5) {
+        break;
+    }
+    echo "Número: $i&lt;br&gt;";
+}
+?&gt;</pre>
+            </div>
+
+            <!-- Subsección: continue -->
+            <h4 class="text-lg text-green-400 mb-2 mt-4">La sentencia continue</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejemplo_continue.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+for ($i = 1; $i <= 5; $i++) {
+    if ($i == 3) {
+        continue;
+    }
+    echo "Número: $i&lt;br&gt;";
+}
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Ejercicio Práctico -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Ejercicio Práctico: Tabla de Multiplicar</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">tabla_multiplicar.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$numero = 7;
+
+for ($i = 1; $i <= 10; $i++) {
+    $resultado = $numero * $i;
+    echo "$numero x $i = $resultado&lt;br&gt;";
+}
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Resumen de la lección -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Resumen de la lección</h3>
+            <ol class="list-decimal list-inside text-gray-300">
+                <li>Aprendimos sobre las estructuras condicionales (if, else, elseif, switch)</li>
+                <li>Estudiamos los diferentes tipos de bucles (for, while, do-while, foreach)</li>
+                <li>Vimos cómo controlar el flujo con break y continue</li>
+                <li>Aplicamos estos conceptos en un programa práctico para imprimir una tabla de multiplicar</li>
+            </ol>
+            <div class="flex justify-center mt-8">
+                <span class="text-6xl">🔄</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Lección 4: Funciones en PHP -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 4: Funciones en PHP</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Sección: ¿Qué es una Función? -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">¿Qué es una Función?</h3>
+            <p class="text-gray-300 mb-4">
+                En esta lección, aprenderás todo sobre <strong>Funciones en PHP</strong>. Las funciones son bloques de código reutilizables que realizan tareas específicas. Nos permiten estructurar mejor el código, evitar la repetición y hacer que el programa sea más claro y modular. Veremos cómo definir y usar funciones, cómo pasar parámetros, cómo retornar valores y cómo funcionan las variables dentro de las funciones.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Definir una función</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">funcion.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'saludar' que no recibe ningún parámetro
+function saludar() {
+    // Dentro de la función, imprimimos el mensaje "¡Hola, bienvenido a PHP!"
+    echo "¡Hola, bienvenido a PHP!";
+}
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Llamar a una función</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">llamar_funcion.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Llamamos a la función 'saludar' que definimos anteriormente
+saludar();  // Esto mostrará: ¡Hola, bienvenido a PHP!
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Funciones con Parámetros -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Funciones con Parámetros</h3>
+            <p class="text-gray-300 mb-4">
+                Las funciones pueden recibir datos (parámetros) para trabajar con ellos dentro de la función. Los parámetros se pasan entre los paréntesis cuando defines y llamas a la función.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Función con un parámetro</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">funcion_parametro.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'saludar' que recibe un parámetro llamado 'nombre'
+function saludar($nombre) {
+    // Dentro de la función, imprimimos el mensaje "¡Hola, " seguido del nombre recibido, seguido de "!"
+    echo "¡Hola, " . $nombre . "!";
+}
+// Llamamos a la función 'saludar' y le pasamos el nombre "Juan"
+saludar("Juan");  // Esto mostrará: ¡Hola, Juan!
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Función con varios parámetros</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">funcion_varios_parametros.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'sumar' que recibe dos parámetros, 'a' y 'b'
+function sumar($a, $b) {
+    // Dentro de la función, imprimimos la suma de 'a' y 'b'
+    echo $a + $b;
+}
+// Llamamos a la función 'sumar' y le pasamos los valores 5 y 3
+sumar(5, 3);  // Esto mostrará: 8
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Valores por defecto en los parámetros</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">funcion_valores_defecto.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'saludar' que recibe un parámetro llamado 'nombre' con un valor por defecto de "visitante"
+function saludar($nombre = "visitante") {
+    // Dentro de la función, imprimimos el mensaje "¡Hola, " seguido del nombre recibido, seguido de "!"
+    echo "¡Hola, " . $nombre . "!";
+}
+// Llamamos a la función 'saludar' sin pasarle ningún valor, por lo que usará el valor por defecto
+saludar();         // Esto mostrará: ¡Hola, visitante!
+// Llamamos a la función 'saludar' y le pasamos el nombre "Desu", por lo que usará este nombre
+saludar("Desu");  // Esto mostrará: ¡Hola, Desu!
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Funciones con Retorno de Valores -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Funciones con Retorno de Valores</h3>
+            <p class="text-gray-300 mb-4">
+                A veces, las funciones necesitan devolver un valor para que puedas trabajar con él. Esto se hace usando la palabra clave `return`.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Función que retorna un valor</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">funcion_retorno.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'multiplicar' que recibe dos parámetros, 'a' y 'b'
+function multiplicar($a, $b) {
+    // Dentro de la función, devolvemos el resultado de la multiplicación de 'a' y 'b'
+    return $a * $b;
+}
+// Llamamos a la función 'multiplicar' y guardamos el resultado en la variable 'resultado'
+$resultado = multiplicar(4, 5);  // Esto devuelve 20
+// Imprimimos el resultado
+echo $resultado;
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Retorno múltiple con `return`</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">funcion_retorno_multiple.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'calcular' que recibe dos parámetros, 'a' y 'b'
+function calcular($a, $b) {
+    // Dentro de la función, devolvemos un array con la suma de 'a' y 'b' en la primera posición y la multiplicación de 'a' y 'b' en la segunda posición
+    return array($a + $b, $a * $b);
+}
+
+// Llamamos a la función 'calcular' y guardamos los resultados en las variables 'suma' y 'multiplicacion'
+list($suma, $multiplicacion) = calcular(3, 4);  // Esto devolverá 7 y 12
+// Imprimimos los resultados
+echo "Suma: " . $suma . ", Multiplicación: " . $multiplicacion;
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Alcance de las Variables -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Alcance de las Variables</h3>
+            <p class="text-gray-300 mb-4">
+                El **alcance** de una variable se refiere a la parte del programa donde dicha variable es accesible. PHP tiene diferentes tipos de alcance para las variables.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Variables locales</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">variable_local.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'mostrarEdad' que no recibe ningún parámetro
+function mostrarEdad() {
+    // Dentro de la función, creamos una variable local llamada 'edad' y le asignamos el valor 25
+    $edad = 25;  // Variable local
+    // Imprimimos el valor de la variable 'edad'
+    echo $edad;
+}
+// Llamamos a la función 'mostrarEdad'
+mostrarEdad();  // Esto mostrará: 25
+// Intentamos imprimir el valor de la variable 'edad' fuera de la función, lo que causará un error porque 'edad' no existe fuera de la función
+echo $edad;     // Esto causará un error porque $edad no existe fuera de la función
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Variables globales</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">variable_global.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos una variable global llamada 'nombre' y le asignamos el valor "Ana"
+$nombre = "Ana";  // Variable global
+
+// Definimos una función llamada 'saludar' que no recibe ningún parámetro
+function saludar() {
+    // Dentro de la función, usamos la palabra clave 'global' para acceder a la variable global 'nombre'
+    global $nombre;
+    // Imprimimos un saludo usando el valor de la variable global 'nombre'
+    echo "Hola, " . $nombre;
+}
+// Llamamos a la función 'saludar'
+saludar();  // Esto mostrará: Hola, Ana
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Variables estáticas (`static`)</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">variable_estatica.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'contador' que no recibe ningún parámetro
+function contador() {
+    // Dentro de la función, creamos una variable estática llamada 'conteo' y le asignamos el valor 0
+    static $conteo = 0;
+    // Incrementamos el valor de la variable 'conteo' en 1
+    $conteo++;
+    // Imprimimos el valor actual de la variable 'conteo'
+    echo $conteo;
+}
+
+// Llamamos a la función 'contador' tres veces
+contador();  // Esto mostrará: 1
+contador();  // Esto mostrará: 2
+contador();  // Esto mostrará: 3
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Práctica: Crear Funciones para Calcular el Área de Figuras Geométricas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Práctica: Crear Funciones para Calcular el Área de Figuras Geométricas</h3>
+            <p class="text-gray-300 mb-4">
+                Vamos a poner en práctica lo aprendido creando funciones que calculen el área de diferentes figuras geométricas (cuadrado, triángulo y círculo).
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Función para el área de un cuadrado</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">area_cuadrado.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'areaCuadrado' que recibe un parámetro llamado 'lado'
+function areaCuadrado($lado) {
+    // Dentro de la función, devolvemos el área del cuadrado, que es el lado al cuadrado
+    return $lado * $lado;
+}
+
+// Llamamos a la función 'areaCuadrado' y le pasamos el lado 4
+echo "Área del cuadrado: " . areaCuadrado(4);  // Esto mostrará: Área del cuadrado: 16
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Función para el área de un triángulo</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">area_triangulo.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'areaTriangulo' que recibe dos parámetros, 'base' y 'altura'
+function areaTriangulo($base, $altura) {
+    // Dentro de la función, devolvemos el área del triángulo, que es la base por la altura dividido por 2
+    return ($base * $altura) / 2;
+}
+
+// Llamamos a la función 'areaTriangulo' y le pasamos la base 5 y la altura 8
+echo "Área del triángulo: " . areaTriangulo(5, 8);  // Esto mostrará: Área del triángulo: 20
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Función para el área de un círculo</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">area_circulo.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Definimos una función llamada 'areaCirculo' que recibe un parámetro llamado 'radio'
+function areaCirculo($radio) {
+    // Dentro de la función, devolvemos el área del círculo, que es pi por el radio al cuadrado
+    return M_PI * ($radio * $radio);
+}
+
+echo "Área del círculo: " . areaCirculo(3);  // Esto mostrará: Área del círculo: 28.2743
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Resumen de la lección -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Resumen de la lección</h3>
+            <ol class="list-decimal list-inside text-gray-300">
+                <li>Aprendimos sobre las funciones en PHP y su importancia en la estructuración y reutilización del código.</li>
+                <li>Estudiamos cómo definir y llamar funciones, cómo pasar parámetros y cómo usar valores por defecto en los parámetros.</li>
+                <li>Vimos cómo una función puede devolver valores y cómo usar `return` para hacerlo.</li>
+                <li>Entendimos las diferencias entre variables locales, globales y estáticas, y cómo afectan el alcance de las variables.</li>
+                <li>Aplicamos lo aprendido creando funciones para calcular el área de diferentes figuras geométricas.</li>
+            </ol>
+            <div class="flex justify-center mt-8">
+                <span class="text-6xl">🔄</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Lección 5: Arrays en PHP -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 5: Arrays en PHP</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Sección: ¿Qué es un Array? -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">¿Qué es un Array?</h3>
+            <p class="text-gray-300 mb-4">
+                Los <strong>arrays</strong> en PHP son estructuras de datos que permiten almacenar múltiples valores en una sola variable. Esto es especialmente útil cuando necesitas agrupar datos relacionados. En esta lección, aprenderás cómo crear y manejar arrays, recorrer sus elementos y utilizar funciones útiles para trabajar con ellos. También realizaremos una práctica donde implementaremos un sistema de calificaciones utilizando arrays asociativos.
+            </p>
+        </div>
+
+        <!-- Sección: Creación de Arrays -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Creación de Arrays</h3>
+            <p class="text-gray-300 mb-4">
+                En PHP, existen principalmente dos tipos de arrays: <strong>indexados</strong> y <strong>asociativos</strong>.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Arrays Indexados</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_indexado.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos un array indexado con la función array()
+$frutas = array("Manzana", "Banana", "Naranja");
+// También puedes usar la sintaxis de corchetes
+$frutas = ["Manzana", "Banana", "Naranja"];
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Arrays Asociativos</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_asociativo.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos un array asociativo con la función array()
+$calificaciones = array("Juan" => 85, "Ana" => 90, "Luis" => 78);
+// También puedes usar la sintaxis de corchetes
+$calificaciones = ["Juan" => 85, "Ana" => 90, "Luis" => 78];
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Recorrido de Arrays -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Recorrido de Arrays</h3>
+            <p class="text-gray-300 mb-4">
+                Para acceder a los elementos de un array, puedes utilizar un bucle. PHP ofrece varias formas de recorrer arrays, como `for`, `foreach`, entre otros.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Usando un bucle `for`</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_for.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos un array de frutas
+$frutas = ["Manzana", "Banana", "Naranja"];
+
+// Usamos un bucle for para recorrer el array
+for ($i = 0; $i < count($frutas); $i++) {
+    echo $frutas[$i] . "&lt;br&gt;";
+}
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Usando `foreach`</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_foreach.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos un array de calificaciones
+$calificaciones = ["Juan" => 85, "Ana" => 90, "Luis" => 78];
+
+// Usamos un bucle foreach para recorrer el array
+foreach ($calificaciones as $nombre => $calificacion) {
+    echo $nombre . ": " . $calificacion . "&lt;br&gt;";
+}
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Arrays Multidimensionales -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Arrays Multidimensionales</h3>
+            <p class="text-gray-300 mb-4">
+                Un <strong>array multidimensional</strong> es un array que contiene uno o más arrays como elementos. Se utilizan para representar estructuras más complejas, como tablas.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Ejemplo de un array multidimensional</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_multidimensional.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos un array multidimensional de estudiantes
+$estudiantes = [
+    ["nombre" => "Juan", "calificacion" => 85],
+    ["nombre" => "Ana", "calificacion" => 90],
+    ["nombre" => "Luis", "calificacion" => 78],
+];
+
+// Usamos un bucle foreach para recorrer el array
+foreach ($estudiantes as $estudiante) {
+    echo $estudiante["nombre"] . ": " . $estudiante["calificacion"] . "&lt;br&gt;";
+}
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Funciones Útiles para Arrays -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Funciones Útiles para Arrays</h3>
+            <p class="text-gray-300 mb-4">
+                PHP ofrece varias funciones que facilitan la manipulación de arrays. Aquí veremos algunas de las más útiles.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">`array_push()`</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_push.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos un array de frutas
+$frutas = ["Manzana", "Banana"];
+// Usamos la función array_push() para agregar elementos al final del array
+array_push($frutas, "Naranja", "Pera");
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">`array_pop()`</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_pop.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Usamos la función array_pop() para eliminar el último elemento del array y devolverlo
+$ultima_fruta = array_pop($frutas);
+echo $ultima_fruta;  // Esto mostrará: Pera
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">`array_merge()`</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_merge.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos un segundo array de frutas
+$mas_frutas = ["Kiwi", "Mango"];
+// Usamos la función array_merge() para combinar los dos arrays
+$frutas_totales = array_merge($frutas, $mas_frutas);
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">`count()`</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_count.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Usamos la función count() para obtener el número de elementos en el array
+$total_frutas = count($frutas);
+echo "Total de frutas: " . $total_frutas;  // Muestra el número total de frutas
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Práctica: Sistema de Calificaciones -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Práctica: Sistema de Calificaciones</h3>
+            <p class="text-gray-300 mb-4">
+                En esta práctica, crearemos un sistema que almacena las calificaciones de los estudiantes en un array asociativo y luego calcularemos el promedio.
+            </p>
+            <h4 class="text-lg text-green-400 mb-2">Crear el array asociativo</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_calificaciones.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Creamos un array asociativo con las calificaciones de los estudiantes
+$calificaciones = [
+    "Juan" => 85,
+    "Ana" => 90,
+    "Luis" => 78,
+    "Marta" => 92,
+    "Pedro" => 88,
+];
+?&gt;</pre>
+            </div>
+            <h4 class="text-lg text-green-400 mb-2">Calcular el promedio</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">array_promedio.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+// Inicializamos la suma y la cantidad de calificaciones
+$suma = 0;
+$cantidad = count($calificaciones);
+
+// Usamos un bucle foreach para sumar todas las calificaciones
+foreach ($calificaciones as $nombre => $calificacion) {
+    $suma += $calificacion;  // Sumar todas las calificaciones
+}
+
+// Calculamos el promedio
+$promedio = $suma / $cantidad;  // Calcular el promedio
+echo "Promedio de calificaciones: " . $promedio;  // Mostrar el promedio
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Resumen de la lección -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Resumen de la lección</h3>
+            <ol class="list-decimal list-inside text-gray-300">
+                <li>Aprendimos sobre los arrays en PHP y su importancia en la estructuración y reutilización del código.</li>
+                <li>Estudiamos cómo crear arrays indexados y asociativos.</li>
+                <li>Vimos cómo recorrer arrays utilizando bucles `for` y `foreach`.</li>
+                <li>Conocimos cómo trabajar con arrays multidimensionales.</li>
+                <li>Estudiamos varias funciones incorporadas en PHP para manipular arrays, como `array_push`, `array_pop`, `array_merge` y `count`.</li>
+                <li>Implementamos un sistema de calificaciones almacenadas en un array asociativo y calculamos el promedio.</li>
+            </ol>
+            <div class="flex justify-center mt-8">
+                <span class="text-6xl">🔄</span>
+            </div>
+        </div>
+    </div>
+</div>
 
 
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Mantener solo la funcionalidad de los desplegables
             document.querySelectorAll('.lesson-header').forEach(header => {
                 header.addEventListener('click', () => {
                     const content = header.nextElementSibling;
@@ -759,14 +1565,12 @@ if ($numeros[0] > $numeros[1] && $numeros[1] < $numeros[2]) {
                 });
             });
 
-            // Inicializar contenido oculto
             document.querySelectorAll('.lesson-content').forEach(content => {
                 content.style.maxHeight = "0";
                 content.style.overflow = "hidden";
                 content.style.transition = "max-height 0.3s ease-in-out";
             });
 
-            // Simplificar funcionalidad de copiar código
             document.querySelectorAll('.code-block button').forEach(button => {
                 button.addEventListener('click', () => {
                     const code = button.closest('.code-block').querySelector('pre').textContent;
