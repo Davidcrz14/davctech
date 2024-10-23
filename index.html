@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos de Programación</title>
+    <!-- Agregamos fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos base */
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Efecto de terminal para el título */
+        .terminal-effect {
+            border-right: 3px solid;
+            animation: cursor-blink 1s step-end infinite;
+        }
+
+        @keyframes cursor-blink {
+            from, to { border-color: transparent }
+            50% { border-color: #10B981; }
+        }
+
+        /* Efecto de resplandor para las tarjetas */
+        .curso-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .curso-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .curso-card:hover::before {
+            left: 100%;
+        }
+
+        .curso-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                       0 10px 10px -5px rgba(0, 0, 0, 0.04),
+                       0 0 20px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Animación de código Matrix */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.03;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(16,185,129,0.1) 100%);
+        }
+
+        /* Nuevos estilos para los botones */
+        .btn-cyber {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid currentColor;
+        }
+
+        .btn-cyber::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: linear-gradient(45deg, #10B981, #3B82F6, #10B981);
+            z-index: -1;
+            animation: border-animate 3s linear infinite;
+        }
+
+        @keyframes border-animate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="matrix-bg"></div>
+
+    <nav class="backdrop-blur-md bg-gray-900/50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 code-font">&lt;DavcTech/&gt;</span>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="#" class="text-gray-300 hover:text-green-400 transition-colors code-font">&gt; Inicio</a>
+                    <a href="#" class="text-gray-300 hover:text-green-400 transition-colors code-font">&gt; Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <h1 class="text-5xl font-bold mb-2 terminal-effect code-font">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                console.log("Aprende a Programar");
+            </span>
+        </h1>
+        <p class="text-xl text-gray-400 mb-12 code-font">$ npm install knowledge --save-future</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Curso SQL -->
+            <div class="curso-card bg-gray-800/50 rounded-lg overflow-hidden hover:shadow-xl border border-green-500/20">
+                <div class="p-6">
+                    <div class="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7z"></path>
+                            <path d="M9 12h6"></path>
+                            <path d="M12 9v6"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-green-400 mb-2 code-font">SELECT * FROM cursos</h2>
+                    <p class="text-gray-300 mb-4">
+                        Domina SQL desde cero: consultas, joins, subconsultas, procedimientos almacenados y más.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-400">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 6v6l4 2"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                            </svg>
+                            Proximamente
+                        </div>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                            </svg>
+                            Practicas
+                        </div>
+                    </div>
+                    <a href="curso-sql.html" class="btn-cyber mt-6 block text-center px-4 py-2 bg-gray-900 text-green-400 rounded-lg hover:text-white hover:bg-green-500 transition-all">
+                        Iniciar_Curso
+                    </a>
+                </div>
+            </div>
+
+            <!-- Curso Python -->
+            <div class="curso-card bg-gray-800/50 rounded-lg overflow-hidden hover:shadow-xl border border-green-500/20">
+                <div class="p-6">
+                    <div class="w-12 h-12 bg-green-900/50 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-green-400 mb-2 code-font">print("Python")</h2>
+                    <p class="text-gray-300 mb-4">
+                        Aprende Python desde cero: estructuras de datos, POO, APIs, Django y más.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-400">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 6v6l4 2"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                            </svg>
+proximamente                        </div>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                            </svg>
+                            practicas
+                        </div>
+                    </div>
+                    <button disabled class="btn-cyber mt-6 block w-full px-4 py-2 bg-gray-900 text-gray-500 rounded-lg cursor-not-allowed">
+                        Próximamente_
+                    </button>
+                </div>
+            </div>
+
+            <!-- Curso JavaScript -->
+            <div class="curso-card bg-gray-800/50 rounded-lg overflow-hidden hover:shadow-xl border border-green-500/20">
+                <div class="p-6">
+                    <div class="w-12 h-12 bg-yellow-900/50 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 4v16m-8-8h16"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-green-400 mb-2 code-font">console.log("JS")</h2>
+                    <p class="text-gray-300 mb-4">
+                        JavaScript moderno: ES6+, React, Node.js, Express y desarrollo full-stack.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-400">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 6v6l4 2"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                            </svg>
+proximamente                        </div>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                            </svg>
+                            practicas
+                        </div>
+                    </div>
+                    <button disabled class="btn-cyber mt-6 block w-full px-4 py-2 bg-gray-900 text-gray-500 rounded-lg cursor-not-allowed">
+                        Próximamente_
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Efecto Matrix en el fondo
+        const matrix = document.createElement('canvas');
+        matrix.classList.add('matrix-bg');
+        document.body.appendChild(matrix);
+
+        const ctx = matrix.getContext('2d');
+        matrix.width = window.innerWidth;
+        matrix.height = window.innerHeight;
+
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+        const fontSize = 10;
+        const columns = matrix.width/fontSize;
+
+        const drops = [];
+        for(let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, matrix.width, matrix.height);
+
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+
+                if(drops[i]*fontSize > matrix.height && Math.random() > 0.975)
+                    drops[i] = 0;
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>

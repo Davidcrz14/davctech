@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso SQL - TechCursos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos base */
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Animación para los desplegables */
+        .lesson-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .lesson-content.active {
+            max-height: 5000px; /* Aumentar este valor para permitir contenido más largo */
+        }
+
+        /* Estilos para bloques de código */
+        .code-block {
+            background: rgba(17, 24, 39, 0.8);
+            border-radius: 0.5rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .code-block:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .code-header {
+            background: rgba(16, 185, 129, 0.1);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Animación para los elementos al aparecer */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Copiar los demás estilos del index.html aquí */
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="matrix-bg"></div>
+
+    <nav class="backdrop-blur-md bg-gray-900/50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 code-font">&lt;TechCursos/&gt;</a>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors code-font">&lt; Volver</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <h1 class="text-4xl font-bold mb-6 code-font">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                Curso de SQL
+            </span>
+        </h1>
+
+        <!-- Lección 1 -->
+        <div class="mb-8">
+            <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+                <h2 class="text-2xl font-semibold code-font text-green-400">Lección 1: Introducción a las bases de datos y SQL</h2>
+                <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="lesson-content mt-4 space-y-6">
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">¿Qué es una base de datos?</h3>
+                    <p class="text-gray-300 mb-4">Una base de datos es un conjunto organizado de información estructurada, almacenada y accesible electrónicamente. Existen dos tipos principales de bases de datos:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>Bases de datos relacionales: Organizan datos en tablas con relaciones entre ellas.</li>
+                        <li>Bases de datos no relacionales (NoSQL): Almacenan datos en formatos flexibles como documentos, grafos o pares clave-valor.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Introducción a SQL</h3>
+                    <p class="text-gray-300 mb-4">SQL (Structured Query Language) es un lenguaje estándar para gestionar y manipular bases de datos relacionales. Permite realizar operaciones como crear, leer, actualizar y eliminar datos (CRUD).</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Historia y evolución de SQL</h3>
+                    <p class="text-gray-300 mb-4">SQL fue desarrollado por IBM en la década de 1970 y se ha convertido en el estándar para bases de datos relacionales. Ha evolucionado con varias versiones y extensiones a lo largo de los años.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Sistemas de gestión de bases de datos relacionales (RDBMS)</h3>
+                    <p class="text-gray-300 mb-4">Los RDBMS más populares incluyen:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>MySQL: Open-source, muy popular para aplicaciones web.</li>
+                        <li>PostgreSQL: Open-source, conocido por su robustez y características avanzadas.</li>
+                        <li>Oracle: Solución empresarial de alto rendimiento.</li>
+                        <li>SQL Server: Desarrollado por Microsoft, integrado con otras herramientas de la compañía.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Instalación y configuración de un entorno de trabajo con SQL</h3>
+                    <p class="text-gray-300 mb-4">Para comenzar, puedes instalar MySQL Community Server y MySQL Workbench, que proporciona una interfaz gráfica para gestionar bases de datos. Visita mysql.com para descargar e instalar estas herramientas.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Comandos básicos: CREATE DATABASE y USE DATABASE</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">comandos_basicos.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Crear una nueva base de datos</span>
+<span class="text-blue-400">CREATE DATABASE</span> mi_primera_db;
+
+<span class="text-green-400">-- Seleccionar la base de datos para su uso</span>
+<span class="text-blue-400">USE</span> mi_primera_db;
+
+<span class="text-green-400">-- Ahora puedes comenzar a crear tablas y trabajar en esta base de datos</span></pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Estos comandos te permiten crear una nueva base de datos y seleccionarla para su uso. Una vez seleccionada, puedes comenzar a crear tablas y realizar otras operaciones dentro de esa base de datos específica.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lección 2 -->
+        <div class="mb-8">
+            <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+                <h2 class="text-2xl font-semibold code-font text-green-400">Lección 2: Creación de tablas y tipos de datos</h2>
+                <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="lesson-content mt-4 space-y-6">
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Estructura de una tabla en SQL</h3>
+                    <p class="text-gray-300 mb-4">Imagina una tabla en SQL como una hoja de cálculo. Cada columna representa un tipo de información (como nombre, edad, correo electrónico), y cada fila es un conjunto completo de datos de una persona o cosa. Por ejemplo, en una tabla de "estudiantes", cada fila sería un estudiante individual con sus datos en las columnas correspondientes.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Tipos de datos en SQL</h3>
+                    <p class="text-gray-300 mb-4">Los tipos de datos son como etiquetas que le dicen a la base de datos qué clase de información guardará cada columna. Aquí hay algunos ejemplos:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>ENTEROS (INT, BIGINT, SMALLINT, TINYINT): Para números sin decimales, como edades o cantidades.</li>
+                        <li>TEXTO (VARCHAR, CHAR, TEXT): Para almacenar palabras o frases, como nombres o direcciones.</li>
+                        <li>FECHAS (DATE, TIME, DATETIME, TIMESTAMP): Para guardar fechas y horas.</li>
+                        <li>BOOLEANOS (BOOLEAN o TINYINT(1)): Para valores de verdadero o falso, como "¿Es estudiante activo?"</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Creación de tablas</h3>
+                    <p class="text-gray-300 mb-4">Crear una tabla es como preparar un formulario en blanco. Definimos qué información queremos recopilar y cómo la guardaremos. Veamos un ejemplo:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">crear_tabla.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Crear una tabla de usuarios</span>
+<span class="text-blue-400">CREATE TABLE</span> usuarios (
+    id INT <span class="text-blue-400">PRIMARY KEY</span> AUTO_INCREMENT,
+    nombre VARCHAR(50) <span class="text-blue-400">NOT NULL</span>,
+    email VARCHAR(100) <span class="text-blue-400">UNIQUE</span>,
+    fecha_registro DATE <span class="text-blue-400">DEFAULT</span> CURRENT_DATE,
+    edad INT <span class="text-blue-400">CHECK</span> (edad >= 18),
+    activo BOOLEAN <span class="text-blue-400">DEFAULT</span> TRUE
+);</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li><code>CREATE TABLE usuarios</code>: Estamos creando una nueva tabla llamada "usuarios".</li>
+                        <li><code>id INT PRIMARY KEY AUTO_INCREMENT</code>: Cada usuario tendrá un número único (id) que se incrementará automáticamente.</li>
+                        <li><code>nombre VARCHAR(50) NOT NULL</code>: El nombre será texto de hasta 50 caracteres y no puede estar vacío.</li>
+                        <li><code>email VARCHAR(100) UNIQUE</code>: El email será texto de hasta 100 caracteres y debe ser único en la tabla.</li>
+                        <li><code>fecha_registro DATE DEFAULT CURRENT_DATE</code>: Guardará la fecha de registro, por defecto la fecha actual.</li>
+                        <li><code>edad INT CHECK (edad >= 18)</code>: La edad debe ser un número entero de 18 o más.</li>
+                        <li><code>activo BOOLEAN DEFAULT TRUE</code>: Indica si el usuario está activo, por defecto será verdadero.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Claves primarias y foráneas</h3>
+                    <p class="text-gray-300 mb-4">Imagina que cada persona tiene un número de identificación único. Eso sería una clave primaria en SQL. Una clave foránea es como una referencia a ese número en otra tabla. Por ejemplo:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">claves.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Crear una tabla con clave foránea</span>
+<span class="text-blue-400">CREATE TABLE</span> pedidos (
+    id INT <span class="text-blue-400">PRIMARY KEY</span> AUTO_INCREMENT,
+    usuario_id INT,
+    producto VARCHAR(100),
+    <span class="text-blue-400">FOREIGN KEY</span> (usuario_id) <span class="text-blue-400">REFERENCES</span> usuarios(id)
+);</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Aquí, <code>usuario_id</code> en la tabla "pedidos" se refiere al <code>id</code> en la tabla "usuarios". Esto nos permite saber qué usuario hizo cada pedido.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Restricciones</h3>
+                    <p class="text-gray-300 mb-4">Las restricciones son reglas que aplicamos a nuestros datos para mantenerlos correctos y consistentes:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>NOT NULL: Es como decir "este campo debe llenarse obligatoriamente".</li>
+                        <li>UNIQUE: Significa "no puede haber dos iguales", como con direcciones de email.</li>
+                        <li>CHECK: Nos permite poner una condición, como "la edad debe ser mayor de 18".</li>
+                        <li>DEFAULT: Establece un valor predeterminado si no se proporciona uno.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Comandos adicionales</h3>
+                    <p class="text-gray-300 mb-4">Estos son algunos comandos útiles para trabajar con tablas:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">comandos_tabla.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Ver todas las tablas en la base de datos actual</span>
+<span class="text-blue-400">SHOW TABLES</span>;
+
+<span class="text-green-400">-- Modificar una tabla existente (agregar una nueva columna)</span>
+<span class="text-blue-400">ALTER TABLE</span> usuarios <span class="text-blue-400">ADD COLUMN</span> telefono VARCHAR(15);
+
+<span class="text-green-400">-- Eliminar una columna de una tabla</span>
+<span class="text-blue-400">ALTER TABLE</span> usuarios <span class="text-blue-400">DROP COLUMN</span> telefono;
+
+<span class="text-green-400">-- Eliminar una tabla (cuidado o te eliminas toda la tabla)</span>
+<span class="text-blue-400">DROP TABLE</span> usuarios;
+
+<span class="text-green-400">-- Ver la estructura de una tabla</span>
+<span class="text-blue-400">DESCRIBE</span> usuarios;
+
+<span class="text-green-400">-- Limpiar todos los datos de una tabla sin eliminar la tabla</span>
+<span class="text-blue-400">TRUNCATE TABLE</span> usuarios;
+
+<span class="text-green-400">-- Renombrar una tabla</span>
+<span class="text-blue-400">RENAME TABLE</span> usuarios <span class="text-blue-400">TO</span> clientes;
+
+<span class="text-green-400">-- Crear un índice en una columna para mejorar el rendimiento de las consultas</span>
+<span class="text-blue-400">CREATE INDEX</span> idx_email <span class="text-blue-400">ON</span> usuarios(email);
+
+<span class="text-green-400">-- Eliminar un índice</span>
+<span class="text-blue-400">DROP INDEX</span> idx_email <span class="text-blue-400">ON</span> usuarios;</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lección 3 -->
+        <div class="mb-8">
+            <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+                <h2 class="text-2xl font-semibold code-font text-green-400">Lección 3: Operaciones básicas de consulta (SELECT)</h2>
+                <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="lesson-content mt-4 space-y-6">
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Sintaxis básica de SELECT</h3>
+                    <p class="text-gray-300 mb-4">La sentencia SELECT es la forma principal de consultar datos en SQL. Su estructura básica es:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">select_basico.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Seleccionar todas las columnas</span>
+<span class="text-blue-400">SELECT</span> * <span class="text-blue-400">FROM</span> usuarios;
+
+<span class="text-green-400">-- Seleccionar columnas específicas</span>
+<span class="text-blue-400">SELECT</span> nombre, email <span class="text-blue-400">FROM</span> usuarios;</pre>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Alias para columnas y tablas</h3>
+                    <p class="text-gray-300 mb-4">Los alias nos permiten renombrar temporalmente columnas o tablas para hacer las consultas más legibles:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">alias.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Alias para columnas</span>
+<span class="text-blue-400">SELECT</span>
+    nombre <span class="text-blue-400">AS</span> 'Nombre Completo',
+    email <span class="text-blue-400">AS</span> 'Correo Electrónico'
+<span class="text-blue-400">FROM</span> usuarios;
+
+<span class="text-green-400">-- Alias para tablas</span>
+<span class="text-blue-400">SELECT</span> u.nombre, u.email
+<span class="text-blue-400">FROM</span> usuarios <span class="text-blue-400">AS</span> u;</pre>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Filtros con WHERE</h3>
+                    <p class="text-gray-300 mb-4">La cláusula WHERE nos permite filtrar los resultados según condiciones específicas:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">filtros_where.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Filtrar por condición exacta</span>
+<span class="text-blue-400">SELECT</span> * <span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">WHERE</span> edad = 25;
+
+<span class="text-green-400">-- Filtrar por múltiples condiciones</span>
+<span class="text-blue-400">SELECT</span> * <span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">WHERE</span> edad > 18 <span class="text-blue-400">AND</span> activo = TRUE;
+
+<span class="text-green-400">-- Buscar patrones con LIKE</span>
+<span class="text-blue-400">SELECT</span> * <span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">WHERE</span> email <span class="text-blue-400">LIKE</span> '%gmail.com';</pre>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Ordenación y límites</h3>
+                    <p class="text-gray-300 mb-4">Podemos ordenar los resultados y limitar la cantidad de registros devueltos:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">orden_limite.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Ordenar resultados</span>
+<span class="text-blue-400">SELECT</span> * <span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">ORDER BY</span> edad DESC;
+
+<span class="text-green-400">-- Limitar número de resultados</span>
+<span class="text-blue-400">SELECT</span> * <span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">LIMIT</span> 10;
+
+<span class="text-green-400">-- Usar OFFSET para paginación</span>
+<span class="text-blue-400">SELECT</span> * <span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">ORDER BY</span> id
+<span class="text-blue-400">LIMIT</span> 10 <span class="text-blue-400">OFFSET</span> 20;</pre>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">DELETE FROM vs TRUNCATE TABLE</h3>
+                    <p class="text-gray-300 mb-4">Es importante entender la diferencia entre estas dos operaciones de eliminación:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li><strong>DELETE FROM:</strong>
+                            <ul class="list-disc list-inside ml-4">
+                                <li>Es una operación DML (Lenguaje de Manipulación de Datos).</li>
+                                <li>Borra los registros de una tabla fila por fila, y cada eliminación genera un registro en el log de transacciones, lo que permite que estas operaciones se deshagan si es necesario (por ejemplo, usando un ROLLBACK en una transacción).</li>
+                                <li>Puede utilizar una cláusula WHERE para eliminar solo filas específicas.</li>
+                            </ul>
+                        </li>
+                        <li><strong>TRUNCATE TABLE:</strong>
+                            <ul class="list-disc list-inside ml-4">
+                                <li>Es una operación DDL (Lenguaje de Definición de Datos).</li>
+                                <li>Elimina todas las filas de una tabla de forma rápida y eficiente, ya que no borra fila por fila, sino que reestablece la tabla a su estado inicial sin generar entradas detalladas en el log de transacciones.</li>
+                                <li>No permite usar WHERE, siempre borra todas las filas.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lección 4 -->
+        <div class="mb-8">
+            <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+                <h2 class="text-2xl font-semibold code-font text-green-400">Lección 4: Insertar, actualizar y eliminar datos (CRUD)</h2>
+                <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="lesson-content mt-4 space-y-6">
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Introducción al CRUD</h3>
+                    <p class="text-gray-300 mb-4">CRUD es un acrónimo que representa las cuatro operaciones básicas en bases de datos:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li><strong>C</strong>reate (Crear): Insertar nuevos datos.</li>
+                        <li><strong>R</strong>ead (Leer): Consultar datos existentes.</li>
+                        <li><strong>U</strong>pdate (Actualizar): Modificar datos existentes.</li>
+                        <li><strong>D</strong>elete (Eliminar): Borrar datos existentes.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Insertar datos en una tabla</h3>
+                    <p class="text-gray-300 mb-4">Usamos el comando INSERT INTO para agregar nuevos registros a una tabla:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">insertar_datos.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Insertar un solo registro</span>
+<span class="text-blue-400">INSERT INTO</span> usuarios (nombre, email, edad)
+<span class="text-blue-400">VALUES</span> ('Ana García', 'ana@email.com', 28);
+
+<span class="text-green-400">-- Insertar múltiples registros</span>
+<span class="text-blue-400">INSERT INTO</span> usuarios (nombre, email, edad)
+<span class="text-blue-400">VALUES</span>
+    ('Carlos López', 'carlos@email.com', 35),
+    ('María Rodríguez', 'maria@email.com', 42);</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>INSERT INTO: Indica que vamos a insertar datos en una tabla.</li>
+                        <li>usuarios (nombre, email, edad): Especifica la tabla y las columnas donde insertaremos los datos.</li>
+                        <li>VALUES: Introduce los valores que se insertarán en las columnas especificadas.</li>
+                        <li>Para insertar múltiples registros, separamos cada conjunto de valores con comas.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Actualizar registros existentes</h3>
+                    <p class="text-gray-300 mb-4">Utilizamos el comando UPDATE para modificar datos existentes en una tabla:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">actualizar_datos.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Actualizar un solo campo</span>
+<span class="text-blue-400">UPDATE</span> usuarios
+<span class="text-blue-400">SET</span> edad = 29
+<span class="text-blue-400">WHERE</span> nombre = 'Ana García';
+
+<span class="text-green-400">-- Actualizar múltiples campos</span>
+<span class="text-blue-400">UPDATE</span> usuarios
+<span class="text-blue-400">SET</span>
+    email = 'nuevo_carlos@email.com',
+    edad = 36
+<span class="text-blue-400">WHERE</span> id = 2;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>UPDATE: Indica que vamos a modificar datos en una tabla.</li>
+                        <li>SET: Especifica qué columnas se actualizarán y con qué valores.</li>
+                        <li>WHERE: Define la condición para seleccionar qué registros se actualizarán.</li>
+                        <li>Para actualizar múltiples campos, los separamos con comas después de SET.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Eliminar registros</h3>
+                    <p class="text-gray-300 mb-4">El comando DELETE se usa para borrar registros de una tabla:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">eliminar_datos.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Eliminar un registro específico</span>
+<span class="text-blue-400">DELETE FROM</span> usuarios
+<span class="text-blue-400">WHERE</span> id = 3;
+
+<span class="text-green-400">-- Eliminar múltiples registros</span>
+<span class="text-blue-400">DELETE FROM</span> usuarios
+<span class="text-blue-400">WHERE</span> edad > 50;
+
+<span class="text-green-400">-- Eliminar todos los registros (¡cuidado!)</span>
+<span class="text-blue-400">DELETE FROM</span> usuarios;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>DELETE FROM: Indica que vamos a eliminar datos de una tabla.</li>
+                        <li>WHERE: Especifica qué registros se eliminarán. Sin WHERE, se eliminarán todos los registros.</li>
+                        <li>Es crucial usar WHERE correctamente para evitar eliminar datos no deseados.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Consideraciones de integridad de los datos</h3>
+                    <p class="text-gray-300 mb-4">Al realizar operaciones CRUD, es importante tener en cuenta:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>Usar transacciones para operaciones que involucren múltiples pasos.</li>
+                        <li>Verificar las restricciones de integridad referencial antes de eliminar o actualizar datos.</li>
+                        <li>Hacer copias de seguridad regularmente para prevenir pérdida de datos.</li>
+                        <li>Utilizar consultas preparadas para prevenir inyecciones SQL.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lección 5 -->
+        <div class="mb-8">
+            <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+                <h2 class="text-2xl font-semibold code-font text-green-400">Lección 5: Funciones agregadas y agrupamiento de datos</h2>
+                <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="lesson-content mt-4 space-y-6">
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Funciones agregadas</h3>
+                    <p class="text-gray-300 mb-4">Las funciones agregadas nos permiten realizar cálculos sobre conjuntos de datos:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">funciones_agregadas.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Contar registros</span>
+<span class="text-blue-400">SELECT COUNT</span>(*) <span class="text-blue-400">FROM</span> usuarios;
+
+<span class="text-green-400">-- Sumar valores</span>
+<span class="text-blue-400">SELECT SUM</span>(edad) <span class="text-blue-400">FROM</span> usuarios;
+
+<span class="text-green-400">-- Promedio de valores</span>
+<span class="text-blue-400">SELECT AVG</span>(edad) <span class="text-blue-400">FROM</span> usuarios;
+
+<span class="text-green-400">-- Valor mínimo</span>
+<span class="text-blue-400">SELECT MIN</span>(edad) <span class="text-blue-400">FROM</span> usuarios;
+
+<span class="text-green-400">-- Valor máximo</span>
+<span class="text-blue-400">SELECT MAX</span>(edad) <span class="text-blue-400">FROM</span> usuarios;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>COUNT(*): Cuenta el número total de filas en la tabla.</li>
+                        <li>SUM(edad): Suma todos los valores de la columna 'edad'.</li>
+                        <li>AVG(edad): Calcula el promedio de los valores en la columna 'edad'.</li>
+                        <li>MIN(edad): Encuentra el valor mínimo en la columna 'edad'.</li>
+                        <li>MAX(edad): Encuentra el valor máximo en la columna 'edad'.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Agrupamiento de resultados con GROUP BY</h3>
+                    <p class="text-gray-300 mb-4">GROUP BY nos permite agrupar resultados basados en una o más columnas:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">group_by.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Contar usuarios por ciudad</span>
+<span class="text-blue-400">SELECT</span> ciudad, <span class="text-blue-400">COUNT</span>(*) as total_usuarios
+<span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">GROUP BY</span> ciudad;
+
+<span class="text-green-400">-- Promedio de edad por género</span>
+<span class="text-blue-400">SELECT</span> genero, <span class="text-blue-400">AVG</span>(edad) as edad_promedio
+<span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">GROUP BY</span> genero;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>SELECT ciudad, COUNT(*): Selecciona la columna 'ciudad' y cuenta los registros.</li>
+                        <li>GROUP BY ciudad: Agrupa los resultados por la columna 'ciudad'.</li>
+                        <li>SELECT genero, AVG(edad): Selecciona 'genero' y calcula el promedio de 'edad'.</li>
+                        <li>GROUP BY genero: Agrupa los resultados por la columna 'genero'.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Uso de HAVING para filtrar después de agrupar</h3>
+                    <p class="text-gray-300 mb-4">HAVING nos permite filtrar resultados después de aplicar GROUP BY:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">having.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Ciudades con más de 100 usuarios</span>
+<span class="text-blue-400">SELECT</span> ciudad, <span class="text-blue-400">COUNT</span>(*) as total_usuarios
+<span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">GROUP BY</span> ciudad
+<span class="text-blue-400">HAVING</span> total_usuarios > 100;
+
+<span class="text-green-400">-- Géneros con edad promedio mayor a 30</span>
+<span class="text-blue-400">SELECT</span> genero, <span class="text-blue-400">AVG</span>(edad) as edad_promedio
+<span class="text-blue-400">FROM</span> usuarios
+<span class="text-blue-400">GROUP BY</span> genero
+<span class="text-blue-400">HAVING</span> edad_promedio > 30;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>HAVING total_usuarios > 100: Filtra grupos con más de 100 usuarios.</li>
+                        <li>HAVING edad_promedio > 30: Filtra grupos con edad promedio mayor a 30.</li>
+                        <li>HAVING se usa después de GROUP BY para filtrar grupos, mientras que WHERE filtra filas individuales antes de agrupar.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Aplicaciones para reportes y estadísticas</h3>
+                    <p class="text-gray-300 mb-4">Estas funciones son esenciales para generar reportes y análisis estadísticos:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">reportes.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Reporte de ventas por categoría</span>
+<span class="text-blue-400">SELECT</span> categoria, <span class="text-blue-400">SUM</span>(monto) as total_ventas,
+       <span class="text-blue-400">COUNT</span>(*) as num_transacciones,
+       <span class="text-blue-400">AVG</span>(monto) as venta_promedio
+<span class="text-blue-400">FROM</span> ventas
+<span class="text-blue-400">GROUP BY</span> categoria
+<span class="text-blue-400">ORDER BY</span> total_ventas DESC;
+
+<span class="text-green-400">-- Análisis de usuarios activos por mes</span>
+<span class="text-blue-400">SELECT</span> EXTRACT(MONTH FROM fecha_login) as mes,
+       <span class="text-blue-400">COUNT</span>(DISTINCT usuario_id) as usuarios_activos
+<span class="text-blue-400">FROM</span> logs_usuario
+<span class="text-blue-400">GROUP BY</span> mes
+<span class="text-blue-400">ORDER BY</span> mes;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Estos ejemplos muestran cómo combinar funciones agregadas, GROUP BY, y ORDER BY para crear reportes útiles y análisis estadísticos de los datos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lección 6 -->
+        <div class="mb-8">
+            <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+                <h2 class="text-2xl font-semibold code-font text-green-400">Lección 6: Joins: combinando datos de múltiples tablas</h2>
+                <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="lesson-content mt-4 space-y-6">
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Concepto de relaciones entre tablas</h3>
+                    <p class="text-gray-300 mb-4">Las relaciones entre tablas nos permiten conectar datos relacionados en diferentes tablas. Esto es fundamental para la normalización de bases de datos y para realizar consultas complejas que involucren múltiples entidades.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Tipos de joins</h3>
+                    <p class="text-gray-300 mb-4">Existen varios tipos de joins que nos permiten combinar datos de diferentes maneras:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">tipos_joins.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- INNER JOIN</span>
+<span class="text-blue-400">SELECT</span> u.nombre, p.producto
+<span class="text-blue-400">FROM</span> usuarios u
+<span class="text-blue-400">INNER JOIN</span> pedidos p <span class="text-blue-400">ON</span> u.id = p.usuario_id;
+
+<span class="text-green-400">-- LEFT JOIN (Outer Left Join)</span>
+<span class="text-blue-400">SELECT</span> u.nombre, p.producto
+<span class="text-blue-400">FROM</span> usuarios u
+<span class="text-blue-400">LEFT JOIN</span> pedidos p <span class="text-blue-400">ON</span> u.id = p.usuario_id;
+
+<span class="text-green-400">-- RIGHT JOIN (Outer Right Join)</span>
+<span class="text-blue-400">SELECT</span> u.nombre, p.producto
+<span class="text-blue-400">FROM</span> usuarios u
+<span class="text-blue-400">RIGHT JOIN</span> pedidos p <span class="text-blue-400">ON</span> u.id = p.usuario_id;
+
+<span class="text-green-400">-- FULL JOIN</span>
+<span class="text-blue-400">SELECT</span> u.nombre, p.producto
+<span class="text-blue-400">FROM</span> usuarios u
+<span class="text-blue-400">FULL JOIN</span> pedidos p <span class="text-blue-400">ON</span> u.id = p.usuario_id;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>INNER JOIN: Devuelve solo las filas que tienen coincidencias en ambas tablas.</li>
+                        <li>LEFT JOIN: Devuelve todas las filas de la tabla izquierda y las coincidencias de la tabla derecha.</li>
+                        <li>RIGHT JOIN: Devuelve todas las filas de la tabla derecha y las coincidencias de la tabla izquierda.</li>
+                        <li>FULL JOIN: Devuelve todas las filas cuando hay una coincidencia en una de las tablas.</li>
+                        <li>ON u.id = p.usuario_id: Especifica la condición de unión entre las tablas.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Ejemplos prácticos de uso de joins en consultas complejas</h3>
+                    <p class="text-gray-300 mb-4">Veamos algunos ejemplos más complejos de cómo usar joins en situaciones reales:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">joins_complejos.sql</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Obtener usuarios con sus pedidos y detalles del producto</span>
+<span class="text-blue-400">SELECT</span> u.nombre, p.fecha_pedido, pr.nombre_producto, pr.precio
+<span class="text-blue-400">FROM</span> usuarios u
+<span class="text-blue-400">INNER JOIN</span> pedidos p <span class="text-blue-400">ON</span> u.id = p.usuario_id
+<span class="text-blue-400">INNER JOIN</span> productos pr <span class="text-blue-400">ON</span> p.producto_id = pr.id;
+
+<span class="text-green-400">-- Encontrar usuarios sin pedidos</span>
+<span class="text-blue-400">SELECT</span> u.nombre
+<span class="text-blue-400">FROM</span> usuarios u
+<span class="text-blue-400">LEFT JOIN</span> pedidos p <span class="text-blue-400">ON</span> u.id = p.usuario_id
+<span class="text-blue-400">WHERE</span> p.id IS NULL;
+
+<span class="text-green-400">-- Calcular el total de ventas por categoría de producto</span>
+<span class="text-blue-400">SELECT</span> c.nombre_categoria, <span class="text-blue-400">SUM</span>(p.precio * dp.cantidad) as total_ventas
+<span class="text-blue-400">FROM</span> categorias c
+<span class="text-blue-400">INNER JOIN</span> productos p <span class="text-blue-400">ON</span> c.id = p.categoria_id
+<span class="text-blue-400">INNER JOIN</span> detalles_pedido dp <span class="text-blue-400">ON</span> p.id = dp.producto_id
+<span class="text-blue-400">GROUP BY</span> c.nombre_categoria
+<span class="text-blue-400">ORDER BY</span> total_ventas DESC;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación línea por línea:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>El primer ejemplo une tres tablas para obtener información detallada de pedidos.</li>
+                        <li>El segundo ejemplo usa un LEFT JOIN para encontrar usuarios que no han realizado pedidos.</li>
+                        <li>El tercer ejemplo combina múltiples joins con funciones agregadas para calcular ventas por categoría.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Consideraciones importantes</h3>
+                    <p class="text-gray-300 mb-4">Al trabajar con joins, ten en cuenta lo siguiente:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>El rendimiento puede verse afectado en joins complejos o con grandes volúmenes de datos.</li>
+                        <li>Asegúrate de tener índices en las columnas utilizadas en las condiciones de join para mejorar el rendimiento.</li>
+                        <li>Utiliza alias de tabla para mejorar la legibilidad de tus consultas, especialmente en joins múltiples.</li>
+                        <li>Considera el uso de subconsultas o vistas en casos de joins muy complejos para mejorar la organización del código.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Funcionalidad para los desplegables
+        document.querySelectorAll('.lesson-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const arrow = header.querySelector('svg');
+
+                content.classList.toggle('active');
+                arrow.style.transform = content.classList.contains('active')
+                    ? 'rotate(180deg)'
+                    : 'rotate(0)';
+            });
+        });
+
+        // Funcionalidad para copiar código
+        document.querySelectorAll('.code-block button').forEach(button => {
+            button.addEventListener('click', () => {
+                const code = button.closest('.code-block').querySelector('pre').textContent;
+                navigator.clipboard.writeText(code);
+
+                button.textContent = '¡copiado!';
+                setTimeout(() => {
+                    button.textContent = 'copiar';
+                }, 2000);
+            });
+        });
+
+        // Efecto Matrix (copiar del index.html)
+    </script>
+</body>
+</html>
