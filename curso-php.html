@@ -6,7 +6,7 @@
     <meta name="author" content="DavC">
     <meta name="description" content="Curso de PHP">
     <link rel="icon" href="php-logo.png" type="image/x-icon">
-    <title>Curso PHP - TechCursos</title>
+    <title>Curso PHP - DavCode</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -27,10 +27,10 @@
         }
 
         .lesson-content.active {
-            max-height: 5000px; /* Aumentar este valor para permitir contenido más largo */
+            max-height: 5000px;
         }
 
-        /* Estilos para bloques de código */
+       /* Estilos para bloques de código */
         .code-block {
             background: rgba(17, 24, 39, 0.8);
             border-radius: 0.5rem;
@@ -62,115 +62,26 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+         @keyframes typing {
+                        from { width: 0 }
+                        to { width: 100% }
+                    }
 
-        /* Animación para el título "Próximamente" */
-        .proximamente {
-            font-size: 4rem;
-            font-weight: bold;
-            text-align: center;
-            color: #10B981;
-            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5),
-                         0 0 20px rgba(16, 185, 129, 0.3),
-                         0 0 30px rgba(16, 185, 129, 0.2);
-            animation: pulsar 2s infinite;
-            opacity: 0.9;
-            letter-spacing: 2px;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
-        }
+                    .typewriter {
+                        overflow: hidden;
+                        border-right: .15em solid #10B981;
+                        white-space: nowrap;
+                        margin: 0 auto;
+                        letter-spacing: .15em;
+                        animation:
+                            typing 2.0s steps(40, end),
+                            blink-caret .75s step-end infinite;
+                    }
 
-        @keyframes pulsar {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        /* Animación de fade-in para el título principal */
-        h1 {
-          opacity: 0;
-          animation: fadeIn 1s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-          0% {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        /* Animación de slide-in para los títulos de cursos */
-        h3 {
-          opacity: 0;
-          transform: translateX(-50px);
-          animation: slideIn 0.8s ease-in-out forwards;
-        }
-
-        @keyframes slideIn {
-          0% {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        /* Animación de zoom-in para las lecciones */
-        .bg-gray-800\/30 {
-          opacity: 0;
-          transform: scale(0.8);
-          animation: zoomIn 0.6s ease-in-out forwards;
-        }
-
-        @keyframes zoomIn {
-          0% {
-            opacity: 0;
-            transform: scale(0.8);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        /* Animación de desaparición al pasar el cursor sobre las lecciones */
-        .bg-gray-800\/30:hover {
-          opacity: 0;
-          transition: opacity 0.3s ease-in-out;
-        }
-
-        /* Animación de typing para el texto de conclusión */
-        .conclusion p {
-          overflow: hidden;
-          border-right: 0.15em solid #10b981;
-          white-space: nowrap;
-          margin: 0 auto;
-          letter-spacing: 0.15em;
-          animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-          from {
-            width: 0;
-          }
-          to {
-            width: 100%;
-          }
-        }
-
-        @keyframes blink-caret {
-          from,
-          to {
-            border-color: transparent;
-          }
-          50% {
-            border-color: #10b981;
-          }
-        }
+                    @keyframes blink-caret {
+                        from, to { border-color: transparent }
+                        50% { border-color: #10B981; }
+                    }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100">
@@ -190,306 +101,684 @@
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
-        <h1 class="proximamente mb-12">Próximamente</h1>
-
-        <h2 class="text-4xl font-bold mb-6 code-font">
+        <h1 class="text-4xl font-bold mb-6 code-font">
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
                 Curso de PHP
             </span>
-        </h2>
+        </h1>
 
-        <!-- Curso 1: PHP Básico a Intermedio -->
-        <div class="mb-12">
-            <h3 class="text-3xl font-bold mb-4 code-font text-green-400">Curso 1: PHP Básico a Intermedio</h3>
-            <p class="text-gray-300 mb-6">Este curso de PHP está diseñado para principiantes que quieren aprender desde los fundamentos hasta temas de nivel intermedio. El objetivo es proporcionar una base sólida en PHP para el desarrollo web.</p>
-
-            <h4 class="text-2xl font-bold mb-4 code-font text-green-400">Temario Curso PHP Básico a Intermedio</h4>
-
-            <!-- Lecciones del curso 1 -->
-            <div class="space-y-4">
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 1: Introducción a PHP</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>¿Qué es PHP? Historia y evolución.</li>
-                        <li>PHP vs otros lenguajes de programación web.</li>
-                        <li>Instalación y configuración de PHP (XAMPP, WAMP, MAMP).</li>
-                        <li>Primer script PHP: Sintaxis básica.</li>
-                        <li>Integración de PHP con HTML.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Escribir un script sencillo que muestre texto en una página HTML.</p>
+        <!-- Lección 1: Introducción a PHP -->
+        <div class="mb-8">
+            <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+                <h2 class="text-2xl font-semibold code-font text-green-400">Lección 1: Introducción a PHP</h2>
+                <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="lesson-content mt-4 space-y-6">
+                <!-- Sección: ¿Qué es PHP? -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">¿Qué es PHP?</h3>
+                    <p class="text-gray-300 mb-4">PHP (Hypertext Preprocessor) es un lenguaje de programación de código abierto, utilizado principalmente para el desarrollo web del lado del servidor. PHP se ejecuta en el servidor, lo que significa que genera HTML u otros tipos de datos (como JSON o XML) que luego se envían al navegador del usuario.</p>
+                    <table class="w-full text-left table-collapse">
+                        <thead>
+                            <tr>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Característica</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800/50">
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Código abierto y gratuito</td>
+                                <td class="p-2 border-t border-gray-700">PHP es completamente libre para usar y distribuir.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Fácil de aprender</td>
+                                <td class="p-2 border-t border-gray-700">Comparado con otros lenguajes de programación, PHP es fácil de aprender y utilizar para principiantes.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Portabilidad</td>
+                                <td class="p-2 border-t border-gray-700">PHP se puede ejecutar en la mayoría de los servidores y sistemas operativos (Windows, Linux, macOS).</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Gran soporte comunitario</td>
+                                <td class="p-2 border-t border-gray-700">Hay una gran cantidad de recursos disponibles debido a su popularidad.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 2: Variables, Tipos de Datos y Operadores</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Declaración de variables en PHP.</li>
-                        <li>Tipos de datos (enteros, cadenas, booleanos, arrays, etc.).</li>
-                        <li>Operadores (aritméticos, de asignación, comparación, lógicos).</li>
-                        <li>Conversión de tipos.</li>
+                <!-- Sección: Historia y evolución de PHP -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Historia y evolución de PHP</h3>
+                    <p class="text-gray-300 mb-4">PHP fue creado en 1994 por Rasmus Lerdorf, inicialmente como un conjunto de scripts CGI (Common Gateway Interface) para rastrear las visitas a su sitio web. Al principio, se llamó "Personal Home Page" (PHP), pero con el tiempo evolucionó a lo que hoy conocemos como Hypertext Preprocessor.</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>PHP 3: Introdujo un motor de scripting que revolucionó su uso.</li>
+                        <li>PHP 4: Añadió mejoras de rendimiento significativas.</li>
+                        <li>PHP 5: Introdujo características orientadas a objetos.</li>
+                        <li>PHP 7: Mejoró drásticamente el rendimiento, reducción del consumo de memoria y nuevas características modernas.</li>
                     </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Ejercicios con operaciones básicas y manejo de variables.</p>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 3: Estructuras de Control</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Sentencias condicionales: if, else, elseif, switch.</li>
-                        <li>Bucles: for, while, do-while, foreach.</li>
-                        <li>Control de flujo con break y continue.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un programa que imprima la tabla de multiplicar de un número usando bucles.</p>
+                <!-- Sección: PHP vs otros lenguajes de programación web -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">PHP vs otros lenguajes de programación web</h3>
+                    <table class="w-full text-left table-collapse">
+                        <thead>
+                            <tr>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Característica</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">PHP</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Python (Django)</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">JavaScript (Node.js)</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Ruby (Ruby on Rails)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800/50">
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Tipo de lenguaje</td>
+                                <td class="p-2 border-t border-gray-700">Servidor</td>
+                                <td class="p-2 border-t border-gray-700">Servidor</td>
+                                <td class="p-2 border-t border-gray-700">Servidor/Cliente</td>
+                                <td class="p-2 border-t border-gray-700">Servidor</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Curva de aprendizaje</td>
+                                <td class="p-2 border-t border-gray-700">Baja</td>
+                                <td class="p-2 border-t border-gray-700">Media</td>
+                                <td class="p-2 border-t border-gray-700">Media/Alta</td>
+                                <td class="p-2 border-t border-gray-700">Media</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Popularidad</td>
+                                <td class="p-2 border-t border-gray-700">Muy popular en la web</td>
+                                <td class="p-2 border-t border-gray-700">Popular, pero no tanto como PHP</td>
+                                <td class="p-2 border-t border-gray-700">Muy popular para aplicaciones modernas</td>
+                                <td class="p-2 border-t border-gray-700">Popular en startups y aplicaciones web</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Velocidad</td>
+                                <td class="p-2 border-t border-gray-700">Rápido (con PHP 7 y 8)</td>
+                                <td class="p-2 border-t border-gray-700">Menos rápido que PHP</td>
+                                <td class="p-2 border-t border-gray-700">Muy rápido con V8 de JS</td>
+                                <td class="p-2 border-t border-gray-700">Similar a PHP</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Casos de uso comunes</td>
+                                <td class="p-2 border-t border-gray-700">Web dinámico, comercio electrónico</td>
+                                <td class="p-2 border-t border-gray-700">Web y scripts para propósitos generales</td>
+                                <td class="p-2 border-t border-gray-700">Aplicaciones web en tiempo real</td>
+                                <td class="p-2 border-t border-gray-700">Aplicaciones web escalables</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 4: Funciones en PHP</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Definición y llamada de funciones.</li>
-                        <li>Funciones con parámetros y valores por defecto.</li>
-                        <li>Funciones con retorno de valores.</li>
-                        <li>Alcance de variables (global, local, static).</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear funciones para calcular el área de diferentes figuras geométricas.</p>
+                <!-- Sección: Instalación y configuración de PHP -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Instalación y configuración de PHP</h3>
+                    <p class="text-gray-300 mb-4">Para empezar a desarrollar en PHP, necesitamos un servidor web y un entorno donde podamos ejecutar nuestros scripts. Las opciones más comunes son:</p>
+                    <ol class="list-decimal list-inside text-gray-300 mb-4">
+                        <li>XAMPP (Windows, Linux, macOS): Un paquete que incluye Apache (servidor web), MySQL (base de datos), PHP y Perl.</li>
+                        <li>WAMP (Windows): Similar a XAMPP, pero solo para Windows. Incluye Apache, MySQL y PHP.</li>
+                        <li>MAMP (macOS): Paquete de servidor local para macOS, que incluye Apache, MySQL y PHP.</li>
+                    </ol>
+                    <h4 class="text-lg text-green-400 mb-2">Instalación de XAMPP en Windows:</h4>
+                    <ol class="list-decimal list-inside text-gray-300 mb-4">
+                        <li>Descarga XAMPP desde el sitio oficial <a href="https://www.apachefriends.org/es/index.html" target="_blank" class="text-blue-400 hover:underline">https://www.apachefriends.org/es/index.html</a>.</li>
+                        <li>Ejecuta el instalador y sigue las instrucciones.</li>
+                        <li>Una vez instalado, abre el Panel de Control de XAMPP y arranca los módulos de Apache y MySQL.</li>
+                        <li>Para probar si PHP está funcionando, crea un archivo llamado <code>index.php</code> en la carpeta <code>htdocs</code> dentro del directorio de XAMPP (por ejemplo, <code>C:\xampp\htdocs\</code>).</li>
+                        <li>Escribe este código dentro de <code>index.php</code>:</li>
+                    </ol>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">index.php</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+    echo "¡Hola, mundo desde PHP!";
+?&gt;</pre>
+                    </div>
+                    <ol start="6" class="list-decimal list-inside text-gray-300 mt-4">
+                        <li>Abre tu navegador web y ve a la URL <code>http://localhost/index.php</code>. Si todo está configurado correctamente, verás el mensaje "¡Hola, mundo desde PHP!".</li>
+                    </ol>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 5: Arrays en PHP</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Creación de arrays: indexados y asociativos.</li>
-                        <li>Recorrido de arrays.</li>
-                        <li>Arrays multidimensionales.</li>
-                        <li>Funciones útiles para arrays: array_push, array_pop, array_merge, count, etc.</li>
+                <!-- Sección: Primer script PHP: Sintaxis básica -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Primer script PHP: Sintaxis básica</h3>
+                    <p class="text-gray-300 mb-4">PHP utiliza la extensión <code>.php</code> para los archivos. La sintaxis básica de PHP se integra directamente en el HTML usando la etiqueta <code>&lt;?php ... ?&gt;</code>. El código dentro de esta etiqueta se ejecuta en el servidor.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">ejemplo.php</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+    // Este es un comentario en PHP
+    echo "¡Hola, mundo!";
+?&gt;</pre>
+                    </div>
+                    <p class="text-gray-300 mt-4">Explicación del código:</p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li><code>&lt;?php ... ?&gt;</code>: Indica el inicio y fin del código PHP dentro de un archivo HTML o PHP.</li>
+                        <li><code>echo</code>: Es un comando en PHP que se utiliza para mostrar texto en la página web.</li>
+                        <li><code>"¡Hola, mundo!"</code>: Es una cadena de texto que se muestra cuando se ejecuta el script.</li>
                     </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema de calificaciones almacenadas en un array asociativo y calcular el promedio.</p>
+                    <p class="text-gray-300">Notas importantes:</p>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Los comentarios en PHP pueden ser de una línea (//) o de múltiples líneas (/* ... */).</li>
+                        <li>Las instrucciones en PHP suelen terminar con un punto y coma (;).</li>
+                    </ul>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 6: Manejo de Formularios en PHP</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Envío de datos con GET y POST.</li>
-                        <li>Acceso a datos de formularios desde PHP.</li>
-                        <li>Validación básica de datos (campo requerido, formato).</li>
-                        <li>Prevención de inyecciones de código.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un formulario de contacto que envíe datos al servidor y los muestre.</p>
+                <!-- Sección: Integración de PHP con HTML -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Integración de PHP con HTML</h3>
+                    <p class="text-gray-300 mb-4">PHP puede integrarse directamente en un archivo HTML. Esto es lo que hace que PHP sea muy flexible para crear páginas dinámicas.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">ejemplo-integrado.php</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Página de prueba en PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bienvenido a mi página web&lt;/h1&gt;
+    &lt;p&gt;Este es un párrafo estático en HTML.&lt;/p&gt;
+
+    &lt;?php
+        echo "&lt;p&gt;Este es un párrafo generado con PHP.&lt;/p&gt;";
+    ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                    </div>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 7: Manejo de Sesiones y Cookies</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>¿Qué son las sesiones y cookies?</li>
-                        <li>Manejo de sesiones en PHP: session_start(), $_SESSION.</li>
-                        <li>Creación, lectura y eliminación de cookies: setcookie(), $_COOKIE.</li>
-                        <li>Comparación entre sesiones y cookies.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema de login simple usando sesiones.</p>
+                <!-- Sección: Práctica: Escribir un script sencillo -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Práctica: Escribir un script sencillo</h3>
+                    <p class="text-gray-300 mb-4">Vamos a crear un pequeño script que combine PHP y HTML:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">practica.php</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Mi primera página PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;¡Bienvenido a PHP!&lt;/h1&gt;
+
+    &lt;?php
+        $mensaje = "Este es un mensaje generado dinámicamente con PHP.";
+        echo "&lt;p&gt;$mensaje&lt;/p&gt;";
+    ?&gt;
+
+    &lt;p&gt;¡Espero que disfrutes programando en PHP!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                    </div>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 8: Manejo de Archivos</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Apertura y cierre de archivos: fopen(), fclose().</li>
-                        <li>Lectura y escritura en archivos: fread(), fwrite().</li>
-                        <li>Funciones de archivos útiles: file_exists(), file_get_contents(), file_put_contents().</li>
-                        <li>Subir archivos al servidor.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema que permita subir archivos y almacenarlos en una carpeta del servidor.</p>
-                </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 9: Programación Orientada a Objetos (POO) en PHP</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Introducción a POO: clases, objetos, propiedades y métodos.</li>
-                        <li>Encapsulamiento: propiedades y métodos public, private, protected.</li>
-                        <li>Herencia y polimorfismo.</li>
-                        <li>Uso de constructores y destructores.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear una clase Vehículo con propiedades y métodos, y extenderla para crear clases derivadas como Auto y Moto.</p>
-                </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 10: Manejo de Bases de Datos con MySQL</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Conectar PHP con MySQL usando mysqli y PDO.</li>
-                        <li>Ejecución de consultas SQL: SELECT, INSERT, UPDATE, DELETE.</li>
-                        <li>Seguridad y consultas preparadas para evitar SQL Injection.</li>
-                        <li>Manejo de errores en la conexión.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un CRUD (Crear, Leer, Actualizar, Eliminar) de una tabla de usuarios.</p>
-                </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 11: Gestión de Excepciones y Errores</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Tipos de errores en PHP: errores de sintaxis, advertencias, y excepciones.</li>
-                        <li>Manejo de excepciones con try, catch y finally.</li>
-                        <li>Uso de funciones de manejo de errores: error_reporting(), set_error_handler().</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema que maneje errores y excepciones al interactuar con una base de datos.</p>
-                </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 12: Buenas Prácticas y Optimización en PHP</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Estructuración de código y modularización.</li>
-                        <li>Mejores prácticas para evitar vulnerabilidades comunes.</li>
-                        <li>Optimización de rendimiento: caching, compresión, y uso adecuado de recursos.</li>
-                        <li>Uso de herramientas de debugging y profiling en PHP.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Refactorización de un proyecto PHP usando buenas prácticas y optimización.</p>
+                <!-- Resumen de la lección -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Resumen de la lección</h3>
+                    <p class="text-gray-300 mb-4">En esta lección hemos cubierto:</p>
+                    <ol class="list-decimal list-inside text-gray-300">
+                        <li>Qué es PHP y su historia</li>
+                        <li>Comparación entre PHP y otros lenguajes de programación web</li>
+                        <li>Cómo instalar PHP usando XAMPP</li>
+                        <li>Escribir y ejecutar un script básico de PHP</li>
+                        <li>Integrar PHP con HTML para generar contenido dinámico</li>
+                    </ol>
+                    <p class="text-gray-300 mt-4">Ahora si, podemos seguir con la siguiente lección .</p>
+                    <div class="flex justify-center mt-8">
+                        <span class="text-6xl">😊</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Curso 2: PHP Intermedio/Avanzado Integrado con Laravel -->
-        <div class="mb-12">
-            <h3 class="text-3xl font-bold mb-4 code-font text-green-400">Curso 2: PHP Intermedio/Avanzado Integrado con Laravel</h3>
-            <p class="text-gray-300 mb-6">En este curso, los estudiantes aprenderán PHP a nivel avanzado, junto con el framework Laravel. Se enfocará en el desarrollo de aplicaciones modernas con Laravel, aprovechando todas las características avanzadas de este framework.</p>
-
-            <h4 class="text-2xl font-bold mb-4 code-font text-green-400">Temario Curso PHP Avanzado con Laravel</h4>
-
-            <!-- Lecciones del curso 2 -->
-            <div class="space-y-4">
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 1: Repaso de PHP Intermedio y Avanzado</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>POO avanzada: namespaces, traits, interfaces, y abstractas.</li>
-                        <li>Manipulación avanzada de bases de datos con PDO.</li>
-                        <li>Patrones de diseño en PHP: Singleton, Factory, MVC.</li>
-                        <li>Principios SOLID y DRY en desarrollo PHP.</li>
+        <!-- Lección 2: Variables, Tipos de Datos y Operadores en PHP -->
+        <div class="mb-8">
+            <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+                <h2 class="text-2xl font-semibold code-font text-green-400">Lección 2: Variables, Tipos de Datos y Operadores en PHP</h2>
+                <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="lesson-content mt-4 space-y-6">
+                <!-- Sección: Declaración de Variables -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Declaración de Variables en PHP</h3>
+                    <p class="text-gray-300 mb-4">
+                        Las variables son espacios en memoria donde almacenamos datos. En PHP, las variables se declaran con el símbolo <code>$</code>.
+                        No es necesario declarar el tipo de dato, ya que PHP es de tipado dinámico. Algunas reglas importantes:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-300 mb-4">
+                        <li>Deben comenzar con el símbolo <code>$</code></li>
+                        <li>El primer carácter debe ser una letra o guion bajo</li>
+                        <li>Son sensibles a mayúsculas y minúsculas</li>
+                        <li>No pueden contener espacios, usa guion bajo <code>_</code> o <code>camelCase</code></li>
                     </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Ejercicios aplicando patrones de diseño y principios SOLID en proyectos PHP.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="text-green-400">variables.php</span>
+                            <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                        </div>
+                        <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+    $nombre = "Juan";        // String
+    $edad = 25;              // Integer
+    $precio = 19.99;         // Float
+    $es_activo = true;       // Boolean
+?&gt;</pre>
+                    </div>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 2: Introducción a Laravel</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>¿Qué es Laravel? Historia y arquitectura.</li>
-                        <li>Instalación de Laravel usando Composer.</li>
-                        <li>Estructura de un proyecto Laravel.</li>
-                        <li>Ciclo de vida de una petición HTTP en Laravel.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un proyecto básico de Laravel y entender su estructura.</p>
+                <!-- Sección: Tipos de Datos -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Tipos de Datos en PHP</h3>
+                    <p class="text-gray-300 mb-4">
+                        PHP soporta varios tipos de datos que puedes utilizar en tus programas. Los más comunes son:
+                    </p>
+                    <table class="w-full text-left table-collapse">
+                        <thead>
+                            <tr>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Tipo</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Descripción</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800/50">
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Integer</td>
+                                <td class="p-2 border-t border-gray-700">Números enteros</td>
+                                <td class="p-2 border-t border-gray-700">$edad = 25;</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Float</td>
+                                <td class="p-2 border-t border-gray-700">Números decimales</td>
+                                <td class="p-2 border-t border-gray-700">$precio = 19.99;</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">String</td>
+                                <td class="p-2 border-t border-gray-700">Cadenas de texto</td>
+                                <td class="p-2 border-t border-gray-700">$nombre = "Juan";</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Boolean</td>
+                                <td class="p-2 border-t border-gray-700">Verdadero o falso</td>
+                                <td class="p-2 border-t border-gray-700">$activo = true;</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">Array</td>
+                                <td class="p-2 border-t border-gray-700">Colección de valores</td>
+                                <td class="p-2 border-t border-gray-700">$colores = array("rojo", "azul");</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700">NULL</td>
+                                <td class="p-2 border-t border-gray-700">Valor especial que representa la ausencia de valor</td>
+                                <td class="p-2 border-t border-gray-700">$sin_valor = null;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4 class="text-lg text-green-400 mt-4 mb-2">Manejo de Arrays</h4>
+                    <p class="text-gray-300 mb-4">PHP tiene dos tipos principales de arrays:</p>
+                    <ol class="list-decimal list-inside text-gray-300 mb-4">
+                        <li>
+                            <strong>Array indexado</strong>: Cada elemento tiene un índice numérico que empieza en <code>0</code>. Ejemplo:
+                            <pre class="p-2 bg-gray-800 rounded text-gray-300 code-font">$colores = array("rojo", "azul", "verde");</pre>
+                        </li>
+                        <li>
+                            <strong>Array asociativo</strong>: Cada elemento tiene una clave (key) en lugar de un índice numérico. Ejemplo:
+                            <pre class="p-2 bg-gray-800 rounded text-gray-300 code-font">$persona = array("nombre" => "Juan", "edad" => 30, "ciudad" => "Madrid");</pre>
+                        </li>
+                    </ol>
+                    <p class="text-gray-300 mb-4">Accediendo a los elementos de un array:</p>
+                    <div class="code-block">
+                        <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+    echo $colores[1]; // Imprime "azul"
+    echo $persona['nombre']; // Imprime "Juan"
+?&gt;</pre>
+                    </div>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 3: Rutas y Controladores en Laravel</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Definición de rutas básicas y avanzadas.</li>
-                        <li>Controladores en Laravel: generación y manejo.</li>
-                        <li>Envío y validación de parámetros en rutas.</li>
-                        <li>Controladores RESTful en Laravel.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear rutas y controladores para una pequeña API de gestión de artículos.</p>
+                <!-- Sección: Operadores -->
+                <div class="bg-gray-800/30 rounded-lg p-6">
+                    <h3 class="text-xl text-green-400 mb-4">Operadores en PHP</h3>
+                    <p class="text-gray-300 mb-4">PHP incluye varios operadores que permiten manipular y comparar valores:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                        <!-- Operadores Aritméticos -->
+                        <div>
+                            <h4 class="text-lg text-green-400 mb-2">Operadores Aritméticos</h4>
+                            <p class="text-gray-300">Se utilizan para realizar cálculos matemáticos.</p>
+                            <table class="w-full text-left table-collapse mb-4">
+                                <thead>
+                                    <tr>
+                                        <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Operador</th>
+                                        <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Descripción</th>
+                                        <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Ejemplo</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-gray-800/50">
+                                    <tr>
+                                        <td class="p-2 border-t border-gray-700"><code>+</code></td>
+                                        <td class="p-2 border-t border-gray-700">Suma</td>
+                                        <td class="p-2 border-t border-gray-700"><code>$a + $b</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border-t border-gray-700"><code>-</code></td>
+                                        <td class="p-2 border-t border-gray-700">Resta</td>
+                                        <td class="p-2 border-t border-gray-700"><code>$a - $b</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border-t border-gray-700"><code>*</code></td>
+                                        <td class="p-2 border-t border-gray-700">Multiplicación</td>
+                                        <td class="p-2 border-t border-gray-700"><code>$a * $b</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border-t border-gray-700"><code>/</code></td>
+                                        <td class="p-2 border-t border-gray-700">División</td>
+                                        <td class="p-2 border-t border-gray-700"><code>$a / $b</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border-t border-gray-700"><code>%</code></td>
+                                        <td class="p-2 border-t border-gray-700">Módulo (resto)</td>
+                                        <td class="p-2 border-t border-gray-700"><code>$a % $b</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="code-block">
+                                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+    $a = 10;
+    $b = 3;
+    $suma = $a + $b;  // Resultado: 13
+    $resta = $a - $b; // Resultado: 7
+    $multiplicacion = $a * $b; // Resultado: 30
+    $division = $a / $b; // Resultado: 3.333...
+    $modulo = $a % $b; // Resultado: 1
+?&gt;</pre>
+                    </div>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 4: Vistas y Blade Template Engine</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Introducción a Blade: el motor de plantillas de Laravel.</li>
-                        <li>Uso de plantillas y layouts en Blade.</li>
-                        <li>Pasar datos desde controladores a vistas.</li>
-                        <li>Directivas y estructuras de control en Blade.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear una vista que muestre una lista de productos con un diseño modular usando Blade.</p>
+                <!-- Operadores de Asignación -->
+                <div>
+                    <h4 class="text-lg text-green-400 mb-2">Operadores de Asignación</h4>
+                    <p class="text-gray-300">Sirven para asignar valores a las variables.</p>
+                    <table class="w-full text-left table-collapse mb-4">
+                        <thead>
+                            <tr>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Operador</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Descripción</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800/50">
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>=</code></td>
+                                <td class="p-2 border-t border-gray-700">Asignación simple</td>
+                                <td class="p-2 border-t border-gray-700"><code>$x = $y</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>+=</code></td>
+                                <td class="p-2 border-t border-gray-700">Suma y asigna</td>
+                                <td class="p-2 border-t border-gray-700"><code>$x += $y</code> (equivale a <code>$x = $x + $y</code>)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>-=</code></td>
+                                <td class="p-2 border-t border-gray-700">Resta y asigna</td>
+                                <td class="p-2 border-t border-gray-700"><code>$x -= $y</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>*=</code></td>
+                                <td class="p-2 border-t border-gray-700">Multiplica y asigna</td>
+                                <td class="p-2 border-t border-gray-700"><code>$x *= $y</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>/=</code></td>
+                                <td class="p-2 border-t border-gray-700">Divide y asigna</td>
+                                <td class="p-2 border-t border-gray-700"><code>$x /= $y</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="code-block">
+                        <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+    $x = 5;
+    $x += 2; // $x ahora es 7
+    $x *= 3; // $x ahora es 21
+?&gt;</pre>
+                    </div>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 5: Bases de Datos y Eloquent ORM</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Conexión a bases de datos y configuración de .env.</li>
-                        <li>Introducción a Eloquent ORM.</li>
-                        <li>Definir modelos y relaciones en Eloquent.</li>
-                        <li>Uso de migraciones para crear y modificar tablas.</li>
-                        <li>Validación de datos con reglas de Eloquent.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema de gestión de usuarios usando Eloquent y migraciones.</p>
+                <!-- Operadores de Comparación -->
+                <div>
+                    <h4 class="text-lg text-green-400 mb-2">Operadores de Comparación</h4>
+                    <p class="text-gray-300">Se utilizan para comparar valores. El resultado siempre será <code>true</code> o <code>false</code>.</p>
+                    <table class="w-full text-left table-collapse mb-4">
+                        <thead>
+                            <tr>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Operador</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Descripción</th>
+                                <th class="text-sm font-medium text-gray-400 p-2 bg-gray-800">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800/50">
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>==</code></td>
+                                <td class="p-2 border-t border-gray-700">Igual a</td>
+                                <td class="p-2 border-t border-gray-700"><code>$a == $b</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>!=</code></td>
+                                <td class="p-2 border-t border-gray-700">Diferente de</td>
+                                <td class="p-2 border-t border-gray-700"><code>$a != $b</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>&gt;</code></td>
+                                <td class="p-2 border-t border-gray-700">Mayor que</td>
+                                <td class="p-2 border-t border-gray-700"><code>$a &gt; $b</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>&lt;</code></td>
+                                <td class="p-2 border-t border-gray-700">Menor que</td>
+                                <td class="p-2 border-t border-gray-700"><code>$a &lt; $b</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>&gt;=</code></td>
+                                <td class="p-2 border-t border-gray-700">Mayor o igual que</td>
+                                <td class="p-2 border-t border-gray-700"><code>$a &gt;= $b</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-t border-gray-700"><code>&lt;=</code></td>
+                                <td class="p-2 border-t border-gray-700">Menor o igual que</td>
+                                <td class="p-2 border-t border-gray-700"><code>$a &lt;= $b</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="code-block">
+                        <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+    $a = 10;
+    $b = 5;
+    $resultado = ($a == $b); // false
+    $resultado = ($a != $b); // true
+    $resultado = ($a &gt; $b); // true
+    $resultado = ($a &lt; $b); // false
+    $resultado = ($a &gt;= $b); // true
+    $resultado = ($a &lt;= $b); // false
+?&gt;</pre>
+                    </div>
                 </div>
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 6: Formularios, Validación y Autenticación</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Creación de formularios con Blade.</li>
-                        <li>Validación de formularios y manejo de errores.</li>
-                        <li>Sistema de autenticación integrado en Laravel.</li>
-                        <li>Personalización del registro y login de usuarios.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Implementar un sistema de autenticación de usuarios con Laravel Auth.</p>
-                </div>
+                <!-- Operadores Lógicos -->
+                <div>
+                    <h4 class="text-lg text-green-400 mb-2">Operadores Lógicos</h4>
+                    <p class="text-gray-300">Se usan para combinar múltiples condiciones lógicas.</p>
+                    <div class="code-block">
+                        <pre class="p-4 text-gray-300 code-font">
+$condicion1 = true;
+$condicion2 = false;
 
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 7: Middleware y Seguridad</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Uso de middleware para controlar el acceso a rutas.</li>
-                        <li>Middleware integrado y creación de middleware personalizado.</li>
-                        <li>Seguridad en Laravel: CSRF, XSS, y protección contra inyecciones SQL.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Implementar middleware para gestionar permisos de usuarios en diferentes rutas.</p>
+$resultado = $condicion1 && $condicion2; // AND: false
+$resultado = $condicion1 || $condicion2; // OR: true
+$resultado = !$condicion1;               // NOT: false</pre>
+                    </div>
                 </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 8: Envío de Emails y Notificaciones</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Configuración del sistema de correo en Laravel.</li>
-                        <li>Envío de correos electrónicos con Mailables.</li>
-                        <li>Notificaciones en Laravel (email, base de datos, SMS).</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Enviar un email de bienvenida cuando un usuario se registre en la aplicación.</p>
-                </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 9: API RESTful con Laravel</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Creación de una API RESTful.</li>
-                        <li>Serialización de datos con Eloquent y respuestas JSON.</li>
-                        <li>Uso de controladores API y rutas protegidas.</li>
-                        <li>Autenticación con Passport o Sanctum.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear una API RESTful para gestionar productos y autenticar usuarios.</p>
-                </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 10: Testing en Laravel</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Introducción a PHPUnit para pruebas automatizadas.</li>
-                        <li>Pruebas de unidades y pruebas funcionales en Laravel.</li>
-                        <li>Creación de pruebas para controladores, modelos y vistas.</li>
-                        <li>Pruebas de integración y uso de factories.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Escribir pruebas unitarias y funcionales para una pequeña aplicación en Laravel.</p>
-                </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 11: Despliegue de Aplicaciones Laravel</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Configuración para entornos de producción.</li>
-                        <li>Despliegue en servidores compartidos y VPS.</li>
-                        <li>Uso de Forge o Vapor para despliegue automatizado.</li>
-                        <li>Configuración de servidores Nginx o Apache para Laravel.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Desplegar una aplicación Laravel en un servidor de pruebas.</p>
-                </div>
-
-                <div class="bg-gray-800/30 rounded-lg p-4">
-                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 12: Optimización y Buenas Prácticas en Laravel</h5>
-                    <ul class="list-disc list-inside text-gray-300">
-                        <li>Mejores prácticas en estructura de proyectos Laravel.</li>
-                        <li>Optimización de rendimiento: caching, optimización de consultas y compresión de recursos.</li>
-                        <li>Herramientas de debugging y profiling en Laravel.</li>
-                        <li>Seguridad y monitoreo de aplicaciones en producción.</li>
-                    </ul>
-                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Optimizar una aplicación Laravel y aplicar técnicas de caché y debugging.</p>
-                </div>
-            </div>
-
-            <div class="mt-8 p-4 bg-gray-800/30 rounded-lg">
-                <h3 class="text-2xl font-bold mb-4 code-font text-green-400">Fecha de Lanzamiento</h3>
-                <p class="text-gray-300">Próximamente</p>
             </div>
         </div>
+
+        <!-- Sección: Conversión de Tipos -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Conversión de Tipos en PHP</h3>
+            <p class="text-gray-300 mb-4">PHP puede convertir tipos de datos automáticamente cuando sea necesario (conversión implícita), pero también puedes hacerlo de forma manual:</p>
+            <div class="code-block">
+                <pre class="p-4 text-gray-300 code-font">
+$num_str = "10";    // Cadena
+$numero = $num_str + 5; // PHP convierte "10" a número automáticamente
+echo $numero;       // Resultado: 15
+
+// Conversión explícita
+$num_str = "3.14";
+$flotante = (float)$num_str;  // Convertimos a flotante
+echo $flotante;  // Resultado: 3.14</pre>
+            </div>
+        </div>
+
+        <!-- Sección: Ejercicio Práctico -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Ejercicio Práctico</h3>
+            <p class="text-gray-300 mb-4">
+                Vamos a realizar algunos ejercicios para practicar el uso de variables, operadores y tipos de datos.
+            </p>
+
+            <!-- Ejercicio 1: Operaciones aritméticas -->
+            <h4 class="text-lg text-green-400 mb-2">Ejercicio 1: Operaciones aritméticas</h4>
+            <div class="code-block">
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$a = 10;
+$b = 4;
+
+echo "Suma: " . ($a + $b) . "&lt;br&gt;";
+echo "Resta: " . ($a - $b) . "&lt;br&gt;";
+echo "Multiplicación: " . ($a * $b) . "&lt;br&gt;";
+echo "División: " . ($a / $b) . "&lt;br&gt;";
+?&gt;</pre>
+            </div>
+
+            <!-- Ejercicio 2: Comparación -->
+            <h4 class="text-lg text-green-400 mb-2">Ejercicio 2: Comparación de edades</h4>
+            <div class="code-block">
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$edad = 17;
+
+if ($edad >= 18) {
+    echo "Eres mayor de edad";
+} else {
+    echo "Eres menor de edad";
+}
+?&gt;</pre>
+            </div>
+
+            <!-- Ejercicio 3: Arrays y operadores lógicos -->
+            <h4 class="text-lg text-green-400 mb-2">Ejercicio 3: Arrays y operadores lógicos</h4>
+            <div class="code-block">
+                <pre class="p-4 text-gray-300 code-font">
+&lt;?php
+$numeros = array(5, 10, 15);
+
+if ($numeros[0] > $numeros[1] && $numeros[1] < $numeros[2]) {
+    echo "La primera condición es verdadera.";
+} else {
+    echo "La condición no se cumple.";
+}
+?&gt;</pre>
+            </div>
+        </div>
+
+        <!-- Resumen de la lección -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Resumen de la lección</h3>
+            <ol class="list-decimal list-inside text-gray-300">
+                <li>Aprendimos sobre la declaración de variables en PHP</li>
+                <li>Conocimos los diferentes tipos de datos disponibles</li>
+                <li>Practicamos con operadores aritméticos y de comparación</li>
+                <li>Realizamos ejercicios prácticos combinando variables y operadores</li>
+            </ol>
+            <div class="flex justify-center mt-8">
+                <span class="text-6xl">🎯</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
     </main>
 
     <script>
-        // Efecto Matrix (copiar del index.html)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mantener solo la funcionalidad de los desplegables
+            document.querySelectorAll('.lesson-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const arrow = header.querySelector('svg');
+
+                    content.classList.toggle('active');
+
+                    if (content.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        setTimeout(() => {
+                            content.style.maxHeight = "none";
+                        }, 300);
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        setTimeout(() => {
+                            content.style.maxHeight = "0";
+                        }, 10);
+                    }
+
+                    arrow.style.transform = content.classList.contains('active')
+                        ? 'rotate(180deg)'
+                        : 'rotate(0)';
+                });
+            });
+
+            // Inicializar contenido oculto
+            document.querySelectorAll('.lesson-content').forEach(content => {
+                content.style.maxHeight = "0";
+                content.style.overflow = "hidden";
+                content.style.transition = "max-height 0.3s ease-in-out";
+            });
+
+            // Simplificar funcionalidad de copiar código
+            document.querySelectorAll('.code-block button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const code = button.closest('.code-block').querySelector('pre').textContent;
+                    navigator.clipboard.writeText(code);
+
+                    button.textContent = 'Copiado 🔆';
+                    setTimeout(() => {
+                        button.textContent = 'Copiar';
+                    }, 2000);
+                });
+            });
+        });
     </script>
 </body>
 </html>
