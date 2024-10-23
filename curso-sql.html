@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="DavC">
+    <meta name="description" content="Curso de SQL">
+    <link rel="icon" href="servidor-sql.png" type="image/x-icon">
     <title>Curso SQL - TechCursos</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -70,8 +73,30 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 code-font">&lt;TechCursos/&gt;</a>
+                    <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 code-font typewriter">&lt;DavCode/&gt;</a>
                 </div>
+                <style>
+                    @keyframes typing {
+                        from { width: 0 }
+                        to { width: 100% }
+                    }
+
+                    .typewriter {
+                        overflow: hidden;
+                        border-right: .15em solid #10B981;
+                        white-space: nowrap;
+                        margin: 0 auto;
+                        letter-spacing: .15em;
+                        animation:
+                            typing 2.0s steps(40, end),
+                            blink-caret .75s step-end infinite;
+                    }
+
+                    @keyframes blink-caret {
+                        from, to { border-color: transparent }
+                        50% { border-color: #10B981; }
+                    }
+                </style>
                 <div class="flex items-center space-x-8">
                     <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors code-font">&lt; Volver</a>
                 </div>
@@ -745,33 +770,1258 @@
                 </div>
             </div>
         </div>
+<!-- Lección 7 -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 7: Subconsultas y consultas avanzadas</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Introducción -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Introducción a las subconsultas</h3>
+            <p class="text-gray-300 mb-4">Una subconsulta es una consulta SQL anidada dentro de otra consulta. Estas nos permiten realizar operaciones más complejas y obtener datos basados en resultados dinámicos. Las subconsultas pueden utilizarse en diferentes partes de una consulta SQL principal.</p>
+        </div>
+
+        <!-- Subconsultas en diferentes cláusulas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Subconsultas en SELECT, FROM y WHERE</h3>
+            <p class="text-gray-300 mb-4">Las subconsultas pueden aparecer en diferentes partes de una consulta SQL. Veamos ejemplos de cada caso:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">subconsultas_ejemplos.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Subconsulta en SELECT</span>
+<span class="text-blue-400">SELECT</span>
+    nombre,
+    edad,
+    (SELECT AVG(edad) FROM usuarios) as edad_promedio
+<span class="text-blue-400">FROM</span> usuarios;
+
+<span class="text-green-400">-- Subconsulta en FROM</span>
+<span class="text-blue-400">SELECT</span> dept_nombre, total_empleados
+<span class="text-blue-400">FROM</span> (
+    <span class="text-blue-400">SELECT</span> d.nombre as dept_nombre, COUNT(*) as total_empleados
+    <span class="text-blue-400">FROM</span> departamentos d
+    <span class="text-blue-400">JOIN</span> empleados e ON d.id = e.departamento_id
+    <span class="text-blue-400">GROUP BY</span> d.nombre
+) as dept_stats;
+
+<span class="text-green-400">-- Subconsulta en WHERE</span>
+<span class="text-blue-400">SELECT</span> nombre, salario
+<span class="text-blue-400">FROM</span> empleados
+<span class="text-blue-400">WHERE</span> salario > (
+    <span class="text-blue-400">SELECT</span> AVG(salario)
+    <span class="text-blue-400">FROM</span> empleados
+);</pre>
+            </div>
+        </div>
+
+        <!-- Subconsultas correlacionadas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Subconsultas correlacionadas</h3>
+            <p class="text-gray-300 mb-4">Una subconsulta correlacionada es aquella que hace referencia a columnas de la consulta exterior. Se ejecuta una vez por cada fila de la consulta principal:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">subconsultas_correlacionadas.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Encontrar empleados que ganan más que el promedio de su departamento</span>
+<span class="text-blue-400">SELECT</span> e.nombre, e.salario, e.departamento_id
+<span class="text-blue-400">FROM</span> empleados e
+<span class="text-blue-400">WHERE</span> e.salario > (
+    <span class="text-blue-400">SELECT</span> AVG(salario)
+    <span class="text-blue-400">FROM</span> empleados e2
+    <span class="text-blue-400">WHERE</span> e2.departamento_id = e.departamento_id
+);
+
+<span class="text-green-400">-- Encontrar el empleado mejor pagado de cada departamento</span>
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">FROM</span> empleados e1
+<span class="text-blue-400">WHERE</span> salario = (
+    <span class="text-blue-400">SELECT</span> MAX(salario)
+    <span class="text-blue-400">FROM</span> empleados e2
+    <span class="text-blue-400">WHERE</span> e2.departamento_id = e1.departamento_id
+);</pre>
+            </div>
+        </div>
+
+        <!-- CTEs -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Expresiones de tabla comunes (CTE)</h3>
+            <p class="text-gray-300 mb-4">Las CTEs (Common Table Expressions) proporcionan una manera más legible de escribir subconsultas complejas. Se definen usando la cláusula WITH:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ctes_ejemplos.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- CTE básico</span>
+<span class="text-blue-400">WITH</span> empleados_dept AS (
+    <span class="text-blue-400">SELECT</span>
+        departamento_id,
+        COUNT(*) as total_empleados,
+        AVG(salario) as salario_promedio
+    <span class="text-blue-400">FROM</span> empleados
+    <span class="text-blue-400">GROUP BY</span> departamento_id
+)
+<span class="text-blue-400">SELECT</span>
+    d.nombre as departamento,
+    ed.total_empleados,
+    ed.salario_promedio
+<span class="text-blue-400">FROM</span> empleados_dept ed
+<span class="text-blue-400">JOIN</span> departamentos d ON ed.departamento_id = d.id;
+
+<span class="text-green-400">-- CTE recursivo para jerarquías</span>
+<span class="text-blue-400">WITH RECURSIVE</span> jerarquia_empleados AS (
+    <span class="text-green-400">-- Caso base</span>
+    <span class="text-blue-400">SELECT</span> id, nombre, supervisor_id, 1 as nivel
+    <span class="text-blue-400">FROM</span> empleados
+    <span class="text-blue-400">WHERE</span> supervisor_id IS NULL
+
+    <span class="text-blue-400">UNION ALL</span>
+
+    <span class="text-green-400">-- Caso recursivo</span>
+    <span class="text-blue-400">SELECT</span>
+        e.id,
+        e.nombre,
+        e.supervisor_id,
+        je.nivel + 1
+    <span class="text-blue-400">FROM</span> empleados e
+    <span class="text-blue-400">JOIN</span> jerarquia_empleados je ON e.supervisor_id = je.id
+)
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">FROM</span> jerarquia_empleados
+<span class="text-blue-400">ORDER BY</span> nivel, id;</pre>
+            </div>
+        </div>
+
+        <!-- Consideraciones y mejores prácticas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Consideraciones importantes</h3>
+            <p class="text-gray-300 mb-4">Al trabajar con subconsultas y CTEs, ten en cuenta lo siguiente:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Las subconsultas pueden afectar el rendimiento si no están bien optimizadas.</li>
+                <li>Las CTEs mejoran la legibilidad y mantenimiento del código.</li>
+                <li>Las subconsultas correlacionadas pueden ser lentas con grandes conjuntos de datos.</li>
+                <li>Considera usar índices apropiados para mejorar el rendimiento.</li>
+                <li>Las CTEs recursivas son útiles para consultar datos jerárquicos, pero pueden consumir muchos recursos.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Lección 8 -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 8: Índices y optimización de consultas</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Introducción a los índices -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">¿Qué son los índices y cómo funcionan?</h3>
+            <p class="text-gray-300 mb-4">Los índices son estructuras de datos especiales que mejoran la velocidad de recuperación de datos en una base de datos. Funcionan de manera similar al índice de un libro, permitiendo encontrar información específica sin necesidad de revisar cada registro.</p>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Mejoran el rendimiento de las consultas SELECT</li>
+                <li>Pueden ralentizar operaciones INSERT, UPDATE y DELETE</li>
+                <li>Ocupan espacio adicional en disco</li>
+                <li>Son actualizados automáticamente cuando los datos cambian</li>
+            </ul>
+        </div>
+
+        <!-- Creación de índices -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Creación de índices en tablas</h3>
+            <p class="text-gray-300 mb-4">La sintaxis básica para crear y eliminar índices:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">crear_indices.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Crear un índice simple</span>
+<span class="text-blue-400">CREATE INDEX</span> idx_apellido
+<span class="text-blue-400">ON</span> empleados(apellido);
+
+<span class="text-green-400">-- Crear un índice único</span>
+<span class="text-blue-400">CREATE UNIQUE INDEX</span> idx_email
+<span class="text-blue-400">ON</span> usuarios(email);
+
+<span class="text-green-400">-- Eliminar un índice</span>
+<span class="text-blue-400">DROP INDEX</span> idx_apellido
+<span class="text-blue-400">ON</span> empleados;</pre>
+            </div>
+        </div>
+
+        <!-- Tipos de índices -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Tipos de índices: índices simples y compuestos</h3>
+            <p class="text-gray-300 mb-4">Existen diferentes tipos de índices para diferentes necesidades:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">tipos_indices.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Índice simple</span>
+<span class="text-blue-400">CREATE INDEX</span> idx_fecha
+<span class="text-blue-400">ON</span> pedidos(fecha_pedido);
+
+<span class="text-green-400">-- Índice compuesto (múltiples columnas)</span>
+<span class="text-blue-400">CREATE INDEX</span> idx_nombre_apellido
+<span class="text-blue-400">ON</span> empleados(nombre, apellido);
+
+<span class="text-green-400">-- Índice parcial (con condición)</span>
+<span class="text-blue-400">CREATE INDEX</span> idx_pedidos_activos
+<span class="text-blue-400">ON</span> pedidos(fecha_pedido)
+<span class="text-blue-400">WHERE</span> estado = 'activo';</pre>
+            </div>
+            <p class="text-gray-300 mt-4">Características de cada tipo:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Índices simples: Ideales para columnas únicas frecuentemente consultadas</li>
+                <li>Índices compuestos: Útiles para consultas que filtran por múltiples columnas</li>
+                <li>Índices parciales: Optimizan consultas sobre un subconjunto específico de datos</li>
+            </ul>
+        </div>
+
+        <!-- Buenas prácticas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Buenas prácticas para optimización de consultas</h3>
+            <p class="text-gray-300 mb-4">Recomendaciones para un uso eficiente de índices:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Crear índices en columnas frecuentemente usadas en cláusulas WHERE</li>
+                <li>Evitar crear demasiados índices (balance entre lectura y escritura)</li>
+                <li>Considerar el orden de las columnas en índices compuestos</li>
+                <li>Monitorear y mantener los índices regularmente</li>
+                <li>Usar EXPLAIN para verificar el uso de índices</li>
+            </ul>
+        </div>
+
+        <!-- EXPLAIN -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Explicación de EXPLAIN para análisis de consultas</h3>
+            <p class="text-gray-300 mb-4">EXPLAIN es una herramienta poderosa para analizar cómo MySQL ejecuta las consultas:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">explain_ejemplos.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Analizar una consulta simple</span>
+<span class="text-blue-400">EXPLAIN</span>
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">FROM</span> empleados
+<span class="text-blue-400">WHERE</span> apellido = 'García';
+
+<span class="text-green-400">-- Analizar una consulta con JOIN</span>
+<span class="text-blue-400">EXPLAIN</span>
+<span class="text-blue-400">SELECT</span> e.nombre, d.nombre_dept
+<span class="text-blue-400">FROM</span> empleados e
+<span class="text-blue-400">JOIN</span> departamentos d
+<span class="text-blue-400">ON</span> e.departamento_id = d.id
+<span class="text-blue-400">WHERE</span> e.salario > 50000;</pre>
+            </div>
+            <p class="text-gray-300 mt-4">Interpretación de EXPLAIN:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>rows: Número estimado de filas a examinar</li>
+                <li>type: Método de acceso (const, ref, range, index, ALL)</li>
+                <li>possible_keys: Índices que podrían usarse</li>
+                <li>key: Índice realmente usado</li>
+                <li>Extra: Información adicional sobre la ejecución</li>
+            </ul>
+        </div>
+
+        <!-- Ejercicios prácticos -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Ejercicios prácticos</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">ejercicios_indices.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- 1. Crear una tabla de prueba</span>
+<span class="text-blue-400">CREATE TABLE</span> ventas (
+    id INT PRIMARY KEY,
+    fecha DATE,
+    cliente_id INT,
+    monto DECIMAL(10,2)
+);
+
+<span class="text-green-400">-- 2. Crear índices apropiados</span>
+<span class="text-blue-400">CREATE INDEX</span> idx_fecha ON ventas(fecha);
+<span class="text-blue-400">CREATE INDEX</span> idx_cliente_fecha ON ventas(cliente_id, fecha);
+
+<span class="text-green-400">-- 3. Analizar consultas con EXPLAIN</span>
+<span class="text-blue-400">EXPLAIN</span>
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">FROM</span> ventas
+<span class="text-blue-400">WHERE</span> fecha BETWEEN '2023-01-01' AND '2023-12-31'
+<span class="text-blue-400">AND</span> cliente_id = 1000;</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lección 9 -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 9: Triggers y procedimientos almacenados</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Introducción a los triggers -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Introducción a los triggers (disparadores)</h3>
+            <p class="text-gray-300 mb-4">Los triggers son objetos de la base de datos que se ejecutan automáticamente en respuesta a ciertos eventos (INSERT, UPDATE, DELETE) en una tabla específica. Son útiles para mantener la integridad de los datos y automatizar tareas.</p>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Se ejecutan automáticamente</li>
+                <li>Pueden ejecutarse BEFORE o AFTER de un evento</li>
+                <li>Ayudan a mantener la integridad referencial</li>
+                <li>Pueden modificar otras tablas</li>
+            </ul>
+        </div>
+
+        <!-- Creación de triggers -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Creación y uso de triggers</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">crear_triggers.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Trigger BEFORE INSERT</span>
+<span class="text-blue-400">DELIMITER</span> //
+<span class="text-blue-400">CREATE TRIGGER</span> before_employee_insert
+<span class="text-blue-400">BEFORE INSERT ON</span> empleados
+<span class="text-blue-400">FOR EACH ROW</span>
+<span class="text-blue-400">BEGIN</span>
+    IF NEW.salario < 0 THEN
+        SET NEW.salario = 0;
+    END IF;
+<span class="text-blue-400">END</span>//
+<span class="text-blue-400">DELIMITER</span> ;
+
+<span class="text-green-400">-- Trigger AFTER UPDATE</span>
+<span class="text-blue-400">CREATE TRIGGER</span> after_salary_update
+<span class="text-blue-400">AFTER UPDATE ON</span> empleados
+<span class="text-blue-400">FOR EACH ROW</span>
+<span class="text-blue-400">BEGIN</span>
+    <span class="text-blue-400">INSERT INTO</span> historial_salarios
+    (empleado_id, salario_anterior, salario_nuevo, fecha_cambio)
+    VALUES
+    (NEW.id, OLD.salario, NEW.salario, NOW());
+<span class="text-blue-400">END</span>;</pre>
+            </div>
+        </div>
+
+        <!-- Procedimientos almacenados -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Procedimientos almacenados: estructura y creación</h3>
+            <p class="text-gray-300 mb-4">Los procedimientos almacenados son conjuntos de instrucciones SQL que se pueden reutilizar. Pueden aceptar parámetros y devolver resultados:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">procedimientos.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Procedimiento básico</span>
+<span class="text-blue-400">DELIMITER</span> //
+<span class="text-blue-400">CREATE PROCEDURE</span> obtener_empleados_dept(
+    IN p_dept_id INT
+)
+<span class="text-blue-400">BEGIN</span>
+    <span class="text-blue-400">SELECT</span> *
+    <span class="text-blue-400">FROM</span> empleados
+    <span class="text-blue-400">WHERE</span> departamento_id = p_dept_id;
+<span class="text-blue-400">END</span>//
+<span class="text-blue-400">DELIMITER</span> ;
+
+<span class="text-green-400">-- Llamar al procedimiento</span>
+<span class="text-blue-400">CALL</span> obtener_empleados_dept(1);</pre>
+            </div>
+        </div>
+
+        <!-- Parámetros en procedimientos -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Parámetros de entrada y salida en procedimientos</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">parametros_procedimientos.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Procedimiento con múltiples parámetros</span>
+<span class="text-blue-400">DELIMITER</span> //
+<span class="text-blue-400">CREATE PROCEDURE</span> calcular_salario_total(
+    IN p_dept_id INT,
+    OUT p_total_salario DECIMAL(10,2),
+    OUT p_num_empleados INT
+)
+<span class="text-blue-400">BEGIN</span>
+    <span class="text-blue-400">SELECT</span>
+        COUNT(*),
+        SUM(salario)
+    <span class="text-blue-400">INTO</span>
+        p_num_empleados,
+        p_total_salario
+    <span class="text-blue-400">FROM</span> empleados
+    <span class="text-blue-400">WHERE</span> departamento_id = p_dept_id;
+<span class="text-blue-400">END</span>//
+<span class="text-blue-400">DELIMITER</span> ;
+
+<span class="text-green-400">-- Usar el procedimiento con parámetros de salida</span>
+<span class="text-blue-400">SET</span> @total = 0;
+<span class="text-blue-400">SET</span> @num = 0;
+<span class="text-blue-400">CALL</span> calcular_salario_total(1, @total, @num);
+<span class="text-blue-400">SELECT</span> @total as total_salario, @num as numero_empleados;</pre>
+            </div>
+        </div>
+
+        <!-- Comparación -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Comparación entre triggers y procedimientos almacenados</h3>
+            <div class="grid grid-cols-2 gap-4 text-gray-300">
+                <div>
+                    <h4 class="font-bold mb-2">Triggers</h4>
+                    <ul class="list-disc list-inside">
+                        <li>Se ejecutan automáticamente</li>
+                        <li>Responden a eventos específicos</li>
+                        <li>No pueden ser llamados directamente</li>
+                        <li>Útiles para mantener integridad</li>
+                        <li>No aceptan parámetros</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Procedimientos almacenados</h4>
+                    <ul class="list-disc list-inside">
+                        <li>Se ejecutan manualmente</li>
+                        <li>Pueden contener lógica compleja</li>
+                        <li>Pueden ser llamados desde aplicaciones</li>
+                        <li>Aceptan parámetros</li>
+                        <li>Pueden retornar resultados</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mejores prácticas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Mejores prácticas y consideraciones</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Usar triggers con moderación para evitar efectos cascada</li>
+                <li>Documentar bien los procedimientos almacenados</li>
+                <li>Manejar errores adecuadamente</li>
+                <li>Considerar el impacto en el rendimiento</li>
+                <li>Mantener la lógica de negocio consistente</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Lección 10 -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 10: Manejo de transacciones y control de concurrencia</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Introducción -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Introducción a las transacciones</h3>
+            <p class="text-gray-300 mb-4">Una transacción es una unidad de trabajo que agrupa una o más operaciones SQL. Estas operaciones deben ejecutarse completamente o no ejecutarse en absoluto, garantizando la integridad de los datos.</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">transaccion_basica.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Ejemplo básico de transacción</span>
+<span class="text-blue-400">START TRANSACTION</span>;  <span class="text-gray-400">-- Inicia una nueva transacción</span>
+
+<span class="text-blue-400">UPDATE</span> cuentas
+<span class="text-blue-400">SET</span> saldo = saldo - 1000
+<span class="text-blue-400">WHERE</span> id = 1;  <span class="text-gray-400">-- Resta dinero de una cuenta</span>
+
+<span class="text-blue-400">UPDATE</span> cuentas
+<span class="text-blue-400">SET</span> saldo = saldo + 1000
+<span class="text-blue-400">WHERE</span> id = 2;  <span class="text-gray-400">-- Suma dinero a otra cuenta</span>
+
+<span class="text-blue-400">COMMIT</span>;  <span class="text-gray-400">-- Confirma los cambios si todo está correcto</span>
+<span class="text-green-400">-- Si hubiera un error, se usaría ROLLBACK para deshacer los cambios</span></pre>
+            </div>
+        </div>
+
+        <!-- Propiedades ACID -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Propiedades ACID</h3>
+            <div class="grid grid-cols-2 gap-4 text-gray-300 mb-4">
+                <div>
+                    <h4 class="font-bold mb-2">Atomicidad (Atomicity)</h4>
+                    <p>Una transacción es una unidad atómica: todo o nada.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Consistencia (Consistency)</h4>
+                    <p>La base de datos debe permanecer en un estado válido.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Aislamiento (Isolation)</h4>
+                    <p>Las transacciones son independientes entre sí.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Durabilidad (Durability)</h4>
+                    <p>Los cambios confirmados son permanentes.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control de transacciones -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Control de transacciones: COMMIT y ROLLBACK</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">control_transacciones.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Ejemplo de transacción con manejo de errores</span>
+<span class="text-blue-400">START TRANSACTION</span>;  <span class="text-gray-400">-- Inicia la transacción</span>
+
+<span class="text-blue-400">SAVEPOINT</span> punto_inicio;  <span class="text-gray-400">-- Crea un punto de guardado</span>
+
+<span class="text-blue-400">INSERT INTO</span> pedidos (cliente_id, producto_id, cantidad)
+<span class="text-blue-400">VALUES</span> (1, 100, 5);  <span class="text-gray-400">-- Inserta un nuevo pedido</span>
+
+<span class="text-blue-400">UPDATE</span> inventario
+<span class="text-blue-400">SET</span> stock = stock - 5
+<span class="text-blue-400">WHERE</span> producto_id = 100;  <span class="text-gray-400">-- Actualiza el inventario</span>
+
+<span class="text-green-400">-- Verificar si hay suficiente stock</span>
+<span class="text-blue-400">IF</span> (SELECT stock FROM inventario WHERE producto_id = 100) < 0 THEN
+    <span class="text-blue-400">ROLLBACK TO</span> punto_inicio;  <span class="text-gray-400">-- Revierte hasta el punto de guardado</span>
+<span class="text-blue-400">ELSE</span>
+    <span class="text-blue-400">COMMIT</span>;  <span class="text-gray-400">-- Confirma los cambios</span>
+<span class="text-blue-400">END IF</span>;</pre>
+            </div>
+        </div>
+
+        <!-- Control de concurrencia -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Conceptos de control de concurrencia</h3>
+            <p class="text-gray-300 mb-4">El control de concurrencia maneja el acceso simultáneo a los datos:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">concurrencia.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Bloqueo explícito de tabla</span>
+<span class="text-blue-400">LOCK TABLES</span> usuarios <span class="text-blue-400">WRITE</span>;  <span class="text-gray-400">-- Bloquea la tabla para escritura</span>
+
+<span class="text-green-400">-- Realizar operaciones...</span>
+<span class="text-blue-400">UPDATE</span> usuarios
+<span class="text-blue-400">SET</span> status = 'activo'
+<span class="text-blue-400">WHERE</span> id = 1;
+
+<span class="text-blue-400">UNLOCK TABLES</span>;  <span class="text-gray-400">-- Libera los bloqueos</span>
+
+<span class="text-green-400">-- Bloqueo a nivel de fila usando SELECT FOR UPDATE</span>
+<span class="text-blue-400">START TRANSACTION</span>;
+
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">FROM</span> inventario
+<span class="text-blue-400">WHERE</span> producto_id = 100
+<span class="text-blue-400">FOR UPDATE</span>;  <span class="text-gray-400">-- Bloquea las filas seleccionadas</span>
+
+<span class="text-green-400">-- Realizar operaciones...</span>
+
+<span class="text-blue-400">COMMIT</span>;  <span class="text-gray-400">-- Libera los bloqueos</span></pre>
+            </div>
+        </div>
+
+        <!-- Niveles de aislamiento -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Niveles de aislamiento de transacciones</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">niveles_aislamiento.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Configurar nivel de aislamiento</span>
+<span class="text-blue-400">SET TRANSACTION ISOLATION LEVEL</span> READ COMMITTED;  <span class="text-gray-400">-- Nivel básico de aislamiento</span>
+
+<span class="text-green-400">-- Ejemplo con REPEATABLE READ</span>
+<span class="text-blue-400">SET TRANSACTION ISOLATION LEVEL</span> REPEATABLE READ;  <span class="text-gray-400">-- Previene lecturas no repetibles</span>
+<span class="text-blue-400">START TRANSACTION</span>;
+
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">FROM</span> productos
+<span class="text-blue-400">WHERE</span> categoria = 'electrónicos';  <span class="text-gray-400">-- Primera lectura</span>
+
+<span class="text-green-400">-- Otras transacciones no pueden modificar estos datos...</span>
+
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">FROM</span> productos
+<span class="text-blue-400">WHERE</span> categoria = 'electrónicos';  <span class="text-gray-400">-- Segunda lectura (mismo resultado garantizado)</span>
+
+<span class="text-blue-400">COMMIT</span>;</pre>
+            </div>
+            <div class="mt-4">
+                <h4 class="text-green-400 mb-2">Niveles de aislamiento disponibles:</h4>
+                <ul class="list-disc list-inside text-gray-300">
+                    <li>READ UNCOMMITTED: Menor aislamiento, permite lecturas sucias</li>
+                    <li>READ COMMITTED: Previene lecturas sucias</li>
+                    <li>REPEATABLE READ: Previene lecturas no repetibles</li>
+                    <li>SERIALIZABLE: Mayor aislamiento, previene lecturas fantasma</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mejores prácticas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Mejores prácticas en transacciones</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Mantener las transacciones lo más cortas posible</li>
+                <li>Usar el nivel de aislamiento apropiado según los requerimientos</li>
+                <li>Manejar adecuadamente los errores y rollbacks</li>
+                <li>Evitar bloqueos innecesarios de tablas</li>
+                <li>Considerar el impacto en el rendimiento al elegir niveles de aislamiento</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Lección 11 -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 11: Seguridad en bases de datos</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Introducción -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Gestión de usuarios y permisos</h3>
+            <p class="text-gray-300 mb-4">La seguridad en bases de datos comienza con una adecuada gestión de usuarios y sus permisos. Cada usuario debe tener solo los privilegios necesarios para realizar sus tareas específicas.</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">gestion_usuarios.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Crear un nuevo usuario</span>
+<span class="text-blue-400">CREATE USER</span> 'analista'@'localhost'
+<span class="text-blue-400">IDENTIFIED BY</span> 'contraseña_segura';  <span class="text-gray-400">-- Crear usuario con contraseña</span>
+
+<span class="text-green-400">-- Otorgar permisos básicos de lectura</span>
+<span class="text-blue-400">GRANT SELECT</span>
+<span class="text-blue-400">ON</span> empresa.*
+<span class="text-blue-400">TO</span> 'analista'@'localhost';  <span class="text-gray-400">-- Permisos de lectura en todas las tablas</span>
+
+<span class="text-green-400">-- Otorgar permisos específicos</span>
+<span class="text-blue-400">GRANT INSERT, UPDATE</span>
+<span class="text-blue-400">ON</span> empresa.reportes
+<span class="text-blue-400">TO</span> 'analista'@'localhost';  <span class="text-gray-400">-- Permisos adicionales en tabla específica</span>
+
+<span class="text-green-400">-- Revocar permisos</span>
+<span class="text-blue-400">REVOKE UPDATE</span>
+<span class="text-blue-400">ON</span> empresa.reportes
+<span class="text-blue-400">FROM</span> 'analista'@'localhost';</pre>
+            </div>
+        </div>
+
+        <!-- Roles y privilegios -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Roles y niveles de privilegios</h3>
+            <div class="grid grid-cols-2 gap-4 text-gray-300 mb-4">
+                <div>
+                    <h4 class="font-bold mb-2">Roles predefinidos</h4>
+                    <ul class="list-disc list-inside">
+                        <li>Administrador (todos los privilegios)</li>
+                        <li>Desarrollador (SELECT, INSERT, UPDATE, DELETE)</li>
+                        <li>Analista (SELECT)</li>
+                        <li>Backup (BACKUP, SELECT)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Privilegios comunes</h4>
+                    <ul class="list-disc list-inside">
+                        <li>SELECT: Lectura de datos</li>
+                        <li>INSERT: Inserción de registros</li>
+                        <li>UPDATE: Modificación de datos</li>
+                        <li>DELETE: Eliminación de registros</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">roles_privilegios.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Crear un rol</span>
+<span class="text-blue-400">CREATE ROLE</span> 'analista_ventas';  <span class="text-gray-400">-- Crear nuevo rol</span>
+
+<span class="text-green-400">-- Asignar privilegios al rol</span>
+<span class="text-blue-400">GRANT SELECT</span>
+<span class="text-blue-400">ON</span> empresa.ventas
+<span class="text-blue-400">TO</span> 'analista_ventas';
+
+<span class="text-green-400">-- Asignar rol a usuario</span>
+<span class="text-blue-400">GRANT</span> 'analista_ventas'
+<span class="text-blue-400">TO</span> 'analista'@'localhost';</pre>
+            </div>
+        </div>
+
+        <!-- Seguridad a nivel de tabla y columna -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Seguridad granular</h3>
+            <p class="text-gray-300 mb-4">La seguridad puede aplicarse a diferentes niveles de granularidad:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">seguridad_granular.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Permisos a nivel de columna</span>
+<span class="text-blue-400">GRANT SELECT</span> (nombre, departamento)
+<span class="text-blue-400">ON</span> empresa.empleados
+<span class="text-blue-400">TO</span> 'analista'@'localhost';  <span class="text-gray-400">-- Solo acceso a columnas específicas</span>
+
+<span class="text-green-400">-- Permisos con condiciones</span>
+<span class="text-blue-400">GRANT SELECT</span>
+<span class="text-blue-400">ON</span> empresa.ventas
+<span class="text-blue-400">TO</span> 'vendedor'@'localhost'
+<span class="text-blue-400">WHERE</span> region = 'Norte';  <span class="text-gray-400">-- Acceso limitado por condición</span></pre>
+            </div>
+        </div>
+
+        <!-- Encriptación -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Encriptación y seguridad de datos</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">encriptacion.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Encriptar datos sensibles</span>
+<span class="text-blue-400">UPDATE</span> usuarios
+<span class="text-blue-400">SET</span> password = AES_ENCRYPT('contraseña123', 'llave_secreta')
+<span class="text-blue-400">WHERE</span> id = 1;  <span class="text-gray-400">-- Encriptar contraseña</span>
+
+<span class="text-green-400">-- Desencriptar datos</span>
+<span class="text-blue-400">SELECT</span>
+    username,
+    AES_DECRYPT(password, 'llave_secreta') as password_descifrado
+<span class="text-blue-400">FROM</span> usuarios;</pre>
+            </div>
+        </div>
+
+        <!-- Auditoría -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Auditoría de bases de datos</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">auditoria.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Crear tabla de auditoría</span>
+<span class="text-blue-400">CREATE TABLE</span> log_auditoria (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50),
+    accion VARCHAR(50),
+    tabla VARCHAR(50),
+    fecha TIMESTAMP,
+    datos_antiguos TEXT,
+    datos_nuevos TEXT
+);
+
+<span class="text-green-400">-- Trigger para auditar cambios</span>
+<span class="text-blue-400">CREATE TRIGGER</span> auditoria_update
+<span class="text-blue-400">AFTER UPDATE ON</span> empleados
+<span class="text-blue-400">FOR EACH ROW</span>
+<span class="text-blue-400">BEGIN</span>
+    <span class="text-blue-400">INSERT INTO</span> log_auditoria
+    (usuario, accion, tabla, fecha, datos_antiguos, datos_nuevos)
+    VALUES
+    (CURRENT_USER(), 'UPDATE', 'empleados', NOW(),
+     JSON_OBJECT('salario', OLD.salario),
+     JSON_OBJECT('salario', NEW.salario));
+<span class="text-blue-400">END</span>;</pre>
+            </div>
+        </div>
+
+        <!-- Mejores prácticas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Mejores prácticas de seguridad</h3>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Aplicar el principio de mínimo privilegio</li>
+                <li>Cambiar contraseñas regularmente</li>
+                <li>Mantener actualizados los sistemas</li>
+                <li>Realizar auditorías regulares</li>
+                <li>Encriptar datos sensibles</li>
+                <li>Implementar políticas de contraseñas fuertes</li>
+                <li>Realizar copias de seguridad regulares</li>
+                <li>Documentar todos los cambios en permisos</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- Lección 12 -->
+<div class="mb-8">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Lección 12: Exportación, importación y backups de bases de datos</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Introducción -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Exportación de datos</h3>
+            <p class="text-gray-300 mb-4">La exportación de datos permite transferir información entre sistemas y crear respaldos en diferentes formatos.</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">exportacion_datos.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Exportar a CSV</span>
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">INTO OUTFILE</span> '/ruta/archivo.csv'
+<span class="text-blue-400">FIELDS TERMINATED BY</span> ','
+<span class="text-blue-400">ENCLOSED BY</span> '"'
+<span class="text-blue-400">LINES TERMINATED BY</span> '\n'
+<span class="text-blue-400">FROM</span> empleados;  <span class="text-gray-400">-- Exporta tabla completa a CSV</span>
+
+<span class="text-green-400">-- Exportar a JSON</span>
+<span class="text-blue-400">SELECT</span> JSON_OBJECT(
+    'id', id,
+    'nombre', nombre,
+    'departamento', departamento
+)
+<span class="text-blue-400">FROM</span> empleados
+<span class="text-blue-400">INTO OUTFILE</span> '/ruta/datos.json';  <span class="text-gray-400">-- Exporta en formato JSON</span></pre>
+            </div>
+        </div>
+
+        <!-- Importación de datos -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Importación de datos</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">importacion_datos.sql</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">-- Importar desde CSV</span>
+<span class="text-blue-400">LOAD DATA INFILE</span> '/ruta/archivo.csv'
+<span class="text-blue-400">INTO TABLE</span> empleados
+<span class="text-blue-400">FIELDS TERMINATED BY</span> ','
+<span class="text-blue-400">ENCLOSED BY</span> '"'
+<span class="text-blue-400">LINES TERMINATED BY</span> '\n'
+<span class="text-blue-400">IGNORE</span> 1 LINES;  <span class="text-gray-400">-- Ignora la primera línea (encabezados)</span>
+
+<span class="text-green-400">-- Importar datos JSON</span>
+<span class="text-blue-400">INSERT INTO</span> empleados
+<span class="text-blue-400">SELECT</span> *
+<span class="text-blue-400">FROM</span> JSON_TABLE(
+    '[{"id": 1, "nombre": "Juan"}]',
+    '$[*]' COLUMNS(
+        id INT PATH '$.id',
+        nombre VARCHAR(50) PATH '$.nombre'
+    )
+) as datos;</pre>
+            </div>
+        </div>
+
+        <!-- Backups -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Copias de seguridad (backups)</h3>
+            <div class="grid grid-cols-2 gap-4 text-gray-300 mb-4">
+                <div>
+                    <h4 class="font-bold mb-2">Tipos de backup</h4>
+                    <ul class="list-disc list-inside">
+                        <li>Backup completo</li>
+                        <li>Backup incremental</li>
+                        <li>Backup diferencial</li>
+                        <li>Backup lógico</li>
+                        <li>Backup físico</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Consideraciones</h4>
+                    <ul class="list-disc list-inside">
+                        <li>Frecuencia de backups</li>
+                        <li>Espacio de almacenamiento</li>
+                        <li>Tiempo de restauración</li>
+                        <li>Verificación de integridad</li>
+                        <li>Políticas de retención</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">backup_comandos.sh</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400"># Backup completo usando mysqldump</span>
+mysqldump -u usuario -p nombre_base > backup_completo.sql
+
+<span class="text-green-400"># Backup de tablas específicas</span>
+mysqldump -u usuario -p nombre_base tabla1 tabla2 > backup_tablas.sql
+
+<span class="text-green-400"># Backup con compresión</span>
+mysqldump -u usuario -p nombre_base | gzip > backup.sql.gz</pre>
+            </div>
+        </div>
+
+        <!-- Restauración -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Restauración de bases de datos</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">restauracion.sh</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400"># Restaurar backup completo</span>
+mysql -u usuario -p nombre_base < backup_completo.sql
+
+<span class="text-green-400"># Restaurar backup comprimido</span>
+gunzip < backup.sql.gz | mysql -u usuario -p nombre_base
+
+<span class="text-green-400"># Restaurar tablas específicas</span>
+mysql -u usuario -p nombre_base < backup_tablas.sql</pre>
+            </div>
+        </div>
+
+        <!-- Estrategias y mejores prácticas -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Estrategias de respaldo y recuperación</h3>
+            <div class="mb-4">
+                <h4 class="text-green-400 mb-2">Plan de backup efectivo</h4>
+                <ul class="list-disc list-inside text-gray-300">
+                    <li>Establecer una política de respaldo clara</li>
+                    <li>Definir la frecuencia de los backups</li>
+                    <li>Implementar diferentes tipos de backup</li>
+                    <li>Verificar regularmente la integridad de los backups</li>
+                    <li>Documentar los procedimientos de respaldo y recuperación</li>
+                </ul>
+            </div>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">script_backup.sh</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">#!/bin/bash</span>
+<span class="text-green-400"># Script automatizado de backup</span>
+
+FECHA=$(date +%Y%m%d)
+BACKUP_DIR="/backups"
+DB_NAME="mi_base"
+USER="usuario"
+PASS="contraseña"
+
+<span class="text-green-400"># Crear backup</span>
+mysqldump -u $USER -p$PASS $DB_NAME | gzip > $BACKUP_DIR/backup_$FECHA.sql.gz
+
+<span class="text-green-400"># Eliminar backups antiguos (más de 30 días)</span>
+find $BACKUP_DIR -name "backup_*.sql.gz" -mtime +30 -delete</pre>
+            </div>
+        </div>
+
+        <!-- Conclusión del curso -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Conclusión del curso</h3>
+            <p class="text-gray-300 mb-4">Has completado todas las lecciones del curso de SQL. Ahora tienes conocimientos sobre:</p>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Fundamentos de SQL y manipulación de datos</li>
+                <li>Diseño y optimización de bases de datos</li>
+                <li>Seguridad y gestión de usuarios</li>
+                <li>Transacciones y concurrencia</li>
+                <li>Respaldo y recuperación de datos</li>
+            </ul>
+            <p class="text-gray-300">Recuerda que la práctica constante es clave para dominar SQL. ¡Continúa explorando y desarrollando tus habilidades!</p>
+        </div>
+    </div>
+</div>
+
+<!-- Sección: USO con PHP -->
+<div class="mb-12 fade-in">
+    <button class="w-full bg-gray-800/50 p-6 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all flex justify-between items-center lesson-header">
+        <h2 class="text-2xl font-semibold code-font text-green-400">Uso práctico con PHP</h2>
+        <svg class="w-6 h-6 text-green-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+    <div class="lesson-content mt-4 space-y-6">
+        <!-- Conexión básica -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Conexión a la base de datos</h3>
+            <p class="text-gray-300 mb-4">Existen dos formas principales de conectar PHP con MySQL:</p>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="bg-gray-900/50 p-4 rounded-lg">
+                    <h4 class="text-green-400 mb-2">MySQLi</h4>
+                    <p class="text-gray-300 text-sm">Específica para MySQL, con soporte para procedimientos almacenados</p>
+                </div>
+                <div class="bg-gray-900/50 p-4 rounded-lg">
+                    <h4 class="text-green-400 mb-2">PDO</h4>
+                    <p class="text-gray-300 text-sm">Compatible con múltiples bases de datos, más flexible</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">conexion.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">// Usando MySQLi (orientado a objetos)</span>
+$mysqli = new mysqli('localhost', 'usuario', 'contraseña', 'basedatos');
+
+<span class="text-green-400">// Verificar conexión</span>
+if ($mysqli->connect_error) {
+    die('Error de conexión: ' . $mysqli->connect_error);
+}
+
+<span class="text-green-400">// Usando PDO</span>
+try {
+    $pdo = new PDO(
+        'mysql:host=localhost;dbname=basedatos;charset=utf8mb4',
+        'usuario',
+        'contraseña',
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+} catch (PDOException $e) {
+    die('Error de conexión: ' . $e->getMessage());
+}</pre>
+            </div>
+        </div>
+
+        <!-- CRUD con PHP -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Operaciones CRUD</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">crud_operaciones.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">// CREATE - Insertar datos</span>
+function crearUsuario($pdo, $nombre, $email) {
+    $sql = "INSERT INTO usuarios (nombre, email) VALUES (?, ?)";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([$nombre, $email]);
+}
+
+<span class="text-green-400">// READ - Leer datos</span>
+function obtenerUsuarios($pdo) {
+    $sql = "SELECT * FROM usuarios";
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
+
+<span class="text-green-400">// UPDATE - Actualizar datos</span>
+function actualizarUsuario($pdo, $id, $nombre) {
+    $sql = "UPDATE usuarios SET nombre = ? WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([$nombre, $id]);
+}
+
+<span class="text-green-400">// DELETE - Eliminar datos</span>
+function eliminarUsuario($pdo, $id) {
+    $sql = "DELETE FROM usuarios WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([$id]);
+}</pre>
+            </div>
+        </div>
+
+        <!-- Transacciones -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Manejo de transacciones</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">transacciones.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">// Ejemplo de transferencia bancaria usando transacciones</span>
+function transferirDinero($pdo, $cuentaOrigen, $cuentaDestino, $monto) {
+    try {
+        $pdo->beginTransaction();
+
+        <span class="text-green-400">// Restar de cuenta origen</span>
+        $sql1 = "UPDATE cuentas SET saldo = saldo - ? WHERE id = ?";
+        $stmt1 = $pdo->prepare($sql1);
+        $stmt1->execute([$monto, $cuentaOrigen]);
+
+        <span class="text-green-400">// Sumar a cuenta destino</span>
+        $sql2 = "UPDATE cuentas SET saldo = saldo + ? WHERE id = ?";
+        $stmt2 = $pdo->prepare($sql2);
+        $stmt2->execute([$monto, $cuentaDestino]);
+
+        $pdo->commit();
+        return true;
+    } catch (Exception $e) {
+        $pdo->rollBack();
+        return false;
+    }
+}</pre>
+            </div>
+        </div>
+
+        <!-- Seguridad -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Prácticas de seguridad</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">seguridad.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<span class="text-green-400">// Prevención de SQL Injection</span>
+function buscarUsuarioSeguro($pdo, $termino) {
+    $sql = "SELECT * FROM usuarios WHERE nombre LIKE ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(["%$termino%"]);
+    return $stmt->fetchAll();
+}
+
+<span class="text-green-400">// Manejo seguro de contraseñas</span>
+function guardarUsuario($pdo, $usuario, $password) {
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO usuarios (usuario, password) VALUES (?, ?)";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([$usuario, $hash]);
+}</pre>
+            </div>
+        </div>
+
+        <!-- Ejemplo práctico completo -->
+        <div class="bg-gray-800/30 rounded-lg p-6">
+            <h3 class="text-xl text-green-400 mb-4">Ejemplo de aplicación</h3>
+            <p class="text-gray-300 mb-4">Sistema simple de gestión de usuarios:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="text-green-400">sistema_usuarios.php</span>
+                    <button class="text-sm text-gray-400 hover:text-green-400">copiar</button>
+                </div>
+                <pre class="p-4 text-gray-300 code-font">
+<?php
+require_once 'conexion.php';
+
+class SistemaUsuarios {
+    private $pdo;
+
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+
+    public function registrarUsuario($nombre, $email, $password) {
+        try {
+            $this->pdo->beginTransaction();
+
+            $sql = "INSERT INTO usuarios (nombre, email, password)
+                   VALUES (?, ?, ?)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                $nombre,
+                $email,
+                password_hash($password, PASSWORD_DEFAULT)
+            ]);
+
+            $this->pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            return false;
+        }
+    }
+
+    public function autenticarUsuario($email, $password) {
+        $sql = "SELECT * FROM usuarios WHERE email = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$email]);
+        $usuario = $stmt->fetch();
+
+        if ($usuario && password_verify($password, $usuario['password'])) {
+            return $usuario;
+        }
+        return false;
+    }
+}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     </main>
 
     <script>
-        // Funcionalidad para los desplegables
+        // Funcionalidad para los desplegables con animación
         document.querySelectorAll('.lesson-header').forEach(header => {
             header.addEventListener('click', () => {
                 const content = header.nextElementSibling;
                 const arrow = header.querySelector('svg');
 
+                content.style.maxHeight = content.classList.contains('active') ? '0px' : `${content.scrollHeight}px`;
                 content.classList.toggle('active');
+
+                arrow.style.transition = 'transform 0.3s ease';
                 arrow.style.transform = content.classList.contains('active')
                     ? 'rotate(180deg)'
                     : 'rotate(0)';
             });
         });
 
-        // Funcionalidad para copiar código
+        // Funcionalidad para copiar código con animación
         document.querySelectorAll('.code-block button').forEach(button => {
             button.addEventListener('click', () => {
                 const code = button.closest('.code-block').querySelector('pre').textContent;
                 navigator.clipboard.writeText(code);
 
-                button.textContent = '¡copiado!';
+                button.textContent = 'Copiado 🔆';
+                button.classList.add('copied');
+
                 setTimeout(() => {
-                    button.textContent = 'copiar';
+                    button.textContent = 'Copiar';
+                    button.classList.remove('copied');
                 }, 2000);
+            });
+        });
+
+        // Efecto de resaltado para bloques de código
+        document.querySelectorAll('.code-block pre').forEach(pre => {
+            pre.addEventListener('mouseover', () => {
+                pre.style.transition = 'background-color 0.3s ease';
+                pre.style.backgroundColor = 'rgba(0, 255, 0, 0.1)';
+            });
+            pre.addEventListener('mouseout', () => {
+                pre.style.backgroundColor = '';
             });
         });
 
