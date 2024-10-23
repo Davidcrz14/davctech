@@ -104,6 +104,28 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Estilos para la animación del título */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #10B981;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation:
+                typing 2s steps(40, end),
+                blink-caret .5s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #10B981; }
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100">
@@ -115,28 +137,6 @@
                 <div class="flex items-center">
                     <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 code-font typewriter">&lt;DavCode/&gt;</a>
                 </div>
-                <style>
-                    @keyframes typing {
-                        from { width: 0 }
-                        to { width: 100% }
-                    }
-
-                    .typewriter {
-                        overflow: hidden;
-                        border-right: .15em solid #10B981;
-                        white-space: nowrap;
-                        margin: 0 auto;
-                        letter-spacing: .15em;
-                        animation:
-                            typing 2s steps(40, end),
-                            blink-caret .5s step-end infinite;
-                    }
-
-                    @keyframes blink-caret {
-                        from, to { border-color: transparent }
-                        50% { border-color: #10B981; }
-                    }
-                </style>
                 <div class="flex items-center space-x-8">
                     <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors code-font">&gt; Inicio</a>
                     <a href="contacto.html" class="text-gray-300 hover:text-green-400 transition-colors code-font">&gt; Contacto</a>
@@ -153,7 +153,7 @@
         </h1>
         <p class="text-xl text-gray-400 mb-12 code-font">$ npm install knowledge --save-future</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
             <!-- Curso SQL -->
             <div class="curso-card bg-gray-800/50 rounded-lg overflow-hidden hover:shadow-xl border border-green-500/20">
                 <div class="p-6">
@@ -174,14 +174,14 @@
                                 <path d="M12 6v6l4 2"></path>
                                 <circle cx="12" cy="12" r="10"></circle>
                             </svg>
-                            Proximamente
+                            12 Lecciones
                         </div>
                         <div class="flex items-center text-sm text-gray-400">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path d="M9 12l2 2 4-4"></path>
                                 <circle cx="12" cy="12" r="10"></circle>
                             </svg>
-                            Practicas
+                            Listo para Estudiar
                         </div>
                     </div>
                     <a href="curso-sql.html" class="btn-cyber mt-6 block text-center px-4 py-2 bg-gray-900 text-green-400 rounded-lg hover:text-white hover:bg-green-500 transition-all">
@@ -208,13 +208,14 @@
                                 <path d="M12 6v6l4 2"></path>
                                 <circle cx="12" cy="12" r="10"></circle>
                             </svg>
-proximamente                        </div>
+                            Proximamente
+                        </div>
                         <div class="flex items-center text-sm text-gray-400">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path d="M9 12l2 2 4-4"></path>
                                 <circle cx="12" cy="12" r="10"></circle>
                             </svg>
-                            practicas
+                            Practicas
                         </div>
                     </div>
                     <button disabled class="btn-cyber mt-6 block w-full px-4 py-2 bg-gray-900 text-gray-500 rounded-lg cursor-not-allowed">
@@ -241,13 +242,14 @@ proximamente                        </div>
                                 <path d="M12 6v6l4 2"></path>
                                 <circle cx="12" cy="12" r="10"></circle>
                             </svg>
-proximamente                        </div>
+                            Proximamente
+                        </div>
                         <div class="flex items-center text-sm text-gray-400">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path d="M9 12l2 2 4-4"></path>
                                 <circle cx="12" cy="12" r="10"></circle>
                             </svg>
-                            practicas
+                            Practicas
                         </div>
                     </div>
                     <button disabled class="btn-cyber mt-6 block w-full px-4 py-2 bg-gray-900 text-gray-500 rounded-lg cursor-not-allowed">
@@ -255,6 +257,40 @@ proximamente                        </div>
                     </button>
                 </div>
             </div>
+
+            <!-- Curso PHP -->
+            <div class="curso-card bg-gray-800/50 rounded-lg overflow-hidden hover:shadow-xl border border-green-500/20">
+    <div class="p-6">
+        <div class="w-12 h-12 bg-purple-900/50 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+        </div>
+        <h2 class="text-xl font-semibold text-green-400 mb-2 code-font">echo "PHP";</h2>
+        <p class="text-gray-300 mb-4">
+            Desarrollo web con PHP: POO, MVC, Laravel, APIs RESTful y más.
+        </p>
+        <div class="space-y-2">
+            <div class="flex items-center text-sm text-gray-400">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span>Proximamente</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-400">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span>Prácticas</span>
+            </div>
+        </div>
+        <a href="curso-php.html" class="btn-cyber mt-6 block text-center px-4 py-2 bg-gray-900 text-green-400 rounded-lg hover:text-white hover:bg-green-500 transition-all">
+            Ver_Temario
+        </a>
+    </div>
+</div>
         </div>
     </main>
 

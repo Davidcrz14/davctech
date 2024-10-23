@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="DavC">
+    <meta name="description" content="Curso de PHP">
+    <link rel="icon" href="php-logo.png" type="image/x-icon">
+    <title>Curso PHP - TechCursos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos base */
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Animación para los desplegables */
+        .lesson-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .lesson-content.active {
+            max-height: 5000px; /* Aumentar este valor para permitir contenido más largo */
+        }
+
+        /* Estilos para bloques de código */
+        .code-block {
+            background: rgba(17, 24, 39, 0.8);
+            border-radius: 0.5rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .code-block:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .code-header {
+            background: rgba(16, 185, 129, 0.1);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Animación para los elementos al aparecer */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animación para el título "Próximamente" */
+        .proximamente {
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            color: #10B981;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5),
+                         0 0 20px rgba(16, 185, 129, 0.3),
+                         0 0 30px rgba(16, 185, 129, 0.2);
+            animation: pulsar 2s infinite;
+            opacity: 0.9;
+            letter-spacing: 2px;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+        }
+
+        @keyframes pulsar {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Animación de fade-in para el título principal */
+        h1 {
+          opacity: 0;
+          animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Animación de slide-in para los títulos de cursos */
+        h3 {
+          opacity: 0;
+          transform: translateX(-50px);
+          animation: slideIn 0.8s ease-in-out forwards;
+        }
+
+        @keyframes slideIn {
+          0% {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        /* Animación de zoom-in para las lecciones */
+        .bg-gray-800\/30 {
+          opacity: 0;
+          transform: scale(0.8);
+          animation: zoomIn 0.6s ease-in-out forwards;
+        }
+
+        @keyframes zoomIn {
+          0% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        /* Animación de desaparición al pasar el cursor sobre las lecciones */
+        .bg-gray-800\/30:hover {
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Animación de typing para el texto de conclusión */
+        .conclusion p {
+          overflow: hidden;
+          border-right: 0.15em solid #10b981;
+          white-space: nowrap;
+          margin: 0 auto;
+          letter-spacing: 0.15em;
+          animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+          from {
+            width: 0;
+          }
+          to {
+            width: 100%;
+          }
+        }
+
+        @keyframes blink-caret {
+          from,
+          to {
+            border-color: transparent;
+          }
+          50% {
+            border-color: #10b981;
+          }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="matrix-bg"></div>
+
+    <nav class="backdrop-blur-md bg-gray-900/50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 code-font typewriter">&lt;DavCode/&gt;</a>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors code-font">&lt; Volver</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <h1 class="proximamente mb-12">Próximamente</h1>
+
+        <h2 class="text-4xl font-bold mb-6 code-font">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                Curso de PHP
+            </span>
+        </h2>
+
+        <!-- Curso 1: PHP Básico a Intermedio -->
+        <div class="mb-12">
+            <h3 class="text-3xl font-bold mb-4 code-font text-green-400">Curso 1: PHP Básico a Intermedio</h3>
+            <p class="text-gray-300 mb-6">Este curso de PHP está diseñado para principiantes que quieren aprender desde los fundamentos hasta temas de nivel intermedio. El objetivo es proporcionar una base sólida en PHP para el desarrollo web.</p>
+
+            <h4 class="text-2xl font-bold mb-4 code-font text-green-400">Temario Curso PHP Básico a Intermedio</h4>
+
+            <!-- Lecciones del curso 1 -->
+            <div class="space-y-4">
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 1: Introducción a PHP</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>¿Qué es PHP? Historia y evolución.</li>
+                        <li>PHP vs otros lenguajes de programación web.</li>
+                        <li>Instalación y configuración de PHP (XAMPP, WAMP, MAMP).</li>
+                        <li>Primer script PHP: Sintaxis básica.</li>
+                        <li>Integración de PHP con HTML.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Escribir un script sencillo que muestre texto en una página HTML.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 2: Variables, Tipos de Datos y Operadores</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Declaración de variables en PHP.</li>
+                        <li>Tipos de datos (enteros, cadenas, booleanos, arrays, etc.).</li>
+                        <li>Operadores (aritméticos, de asignación, comparación, lógicos).</li>
+                        <li>Conversión de tipos.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Ejercicios con operaciones básicas y manejo de variables.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 3: Estructuras de Control</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Sentencias condicionales: if, else, elseif, switch.</li>
+                        <li>Bucles: for, while, do-while, foreach.</li>
+                        <li>Control de flujo con break y continue.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un programa que imprima la tabla de multiplicar de un número usando bucles.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 4: Funciones en PHP</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Definición y llamada de funciones.</li>
+                        <li>Funciones con parámetros y valores por defecto.</li>
+                        <li>Funciones con retorno de valores.</li>
+                        <li>Alcance de variables (global, local, static).</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear funciones para calcular el área de diferentes figuras geométricas.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 5: Arrays en PHP</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Creación de arrays: indexados y asociativos.</li>
+                        <li>Recorrido de arrays.</li>
+                        <li>Arrays multidimensionales.</li>
+                        <li>Funciones útiles para arrays: array_push, array_pop, array_merge, count, etc.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema de calificaciones almacenadas en un array asociativo y calcular el promedio.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 6: Manejo de Formularios en PHP</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Envío de datos con GET y POST.</li>
+                        <li>Acceso a datos de formularios desde PHP.</li>
+                        <li>Validación básica de datos (campo requerido, formato).</li>
+                        <li>Prevención de inyecciones de código.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un formulario de contacto que envíe datos al servidor y los muestre.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 7: Manejo de Sesiones y Cookies</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>¿Qué son las sesiones y cookies?</li>
+                        <li>Manejo de sesiones en PHP: session_start(), $_SESSION.</li>
+                        <li>Creación, lectura y eliminación de cookies: setcookie(), $_COOKIE.</li>
+                        <li>Comparación entre sesiones y cookies.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema de login simple usando sesiones.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 8: Manejo de Archivos</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Apertura y cierre de archivos: fopen(), fclose().</li>
+                        <li>Lectura y escritura en archivos: fread(), fwrite().</li>
+                        <li>Funciones de archivos útiles: file_exists(), file_get_contents(), file_put_contents().</li>
+                        <li>Subir archivos al servidor.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema que permita subir archivos y almacenarlos en una carpeta del servidor.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 9: Programación Orientada a Objetos (POO) en PHP</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Introducción a POO: clases, objetos, propiedades y métodos.</li>
+                        <li>Encapsulamiento: propiedades y métodos public, private, protected.</li>
+                        <li>Herencia y polimorfismo.</li>
+                        <li>Uso de constructores y destructores.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear una clase Vehículo con propiedades y métodos, y extenderla para crear clases derivadas como Auto y Moto.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 10: Manejo de Bases de Datos con MySQL</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Conectar PHP con MySQL usando mysqli y PDO.</li>
+                        <li>Ejecución de consultas SQL: SELECT, INSERT, UPDATE, DELETE.</li>
+                        <li>Seguridad y consultas preparadas para evitar SQL Injection.</li>
+                        <li>Manejo de errores en la conexión.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un CRUD (Crear, Leer, Actualizar, Eliminar) de una tabla de usuarios.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 11: Gestión de Excepciones y Errores</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Tipos de errores en PHP: errores de sintaxis, advertencias, y excepciones.</li>
+                        <li>Manejo de excepciones con try, catch y finally.</li>
+                        <li>Uso de funciones de manejo de errores: error_reporting(), set_error_handler().</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema que maneje errores y excepciones al interactuar con una base de datos.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 12: Buenas Prácticas y Optimización en PHP</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Estructuración de código y modularización.</li>
+                        <li>Mejores prácticas para evitar vulnerabilidades comunes.</li>
+                        <li>Optimización de rendimiento: caching, compresión, y uso adecuado de recursos.</li>
+                        <li>Uso de herramientas de debugging y profiling en PHP.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Refactorización de un proyecto PHP usando buenas prácticas y optimización.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Curso 2: PHP Intermedio/Avanzado Integrado con Laravel -->
+        <div class="mb-12">
+            <h3 class="text-3xl font-bold mb-4 code-font text-green-400">Curso 2: PHP Intermedio/Avanzado Integrado con Laravel</h3>
+            <p class="text-gray-300 mb-6">En este curso, los estudiantes aprenderán PHP a nivel avanzado, junto con el framework Laravel. Se enfocará en el desarrollo de aplicaciones modernas con Laravel, aprovechando todas las características avanzadas de este framework.</p>
+
+            <h4 class="text-2xl font-bold mb-4 code-font text-green-400">Temario Curso PHP Avanzado con Laravel</h4>
+
+            <!-- Lecciones del curso 2 -->
+            <div class="space-y-4">
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 1: Repaso de PHP Intermedio y Avanzado</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>POO avanzada: namespaces, traits, interfaces, y abstractas.</li>
+                        <li>Manipulación avanzada de bases de datos con PDO.</li>
+                        <li>Patrones de diseño en PHP: Singleton, Factory, MVC.</li>
+                        <li>Principios SOLID y DRY en desarrollo PHP.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Ejercicios aplicando patrones de diseño y principios SOLID en proyectos PHP.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 2: Introducción a Laravel</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>¿Qué es Laravel? Historia y arquitectura.</li>
+                        <li>Instalación de Laravel usando Composer.</li>
+                        <li>Estructura de un proyecto Laravel.</li>
+                        <li>Ciclo de vida de una petición HTTP en Laravel.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un proyecto básico de Laravel y entender su estructura.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 3: Rutas y Controladores en Laravel</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Definición de rutas básicas y avanzadas.</li>
+                        <li>Controladores en Laravel: generación y manejo.</li>
+                        <li>Envío y validación de parámetros en rutas.</li>
+                        <li>Controladores RESTful en Laravel.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear rutas y controladores para una pequeña API de gestión de artículos.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 4: Vistas y Blade Template Engine</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Introducción a Blade: el motor de plantillas de Laravel.</li>
+                        <li>Uso de plantillas y layouts en Blade.</li>
+                        <li>Pasar datos desde controladores a vistas.</li>
+                        <li>Directivas y estructuras de control en Blade.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear una vista que muestre una lista de productos con un diseño modular usando Blade.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 5: Bases de Datos y Eloquent ORM</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Conexión a bases de datos y configuración de .env.</li>
+                        <li>Introducción a Eloquent ORM.</li>
+                        <li>Definir modelos y relaciones en Eloquent.</li>
+                        <li>Uso de migraciones para crear y modificar tablas.</li>
+                        <li>Validación de datos con reglas de Eloquent.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear un sistema de gestión de usuarios usando Eloquent y migraciones.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 6: Formularios, Validación y Autenticación</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Creación de formularios con Blade.</li>
+                        <li>Validación de formularios y manejo de errores.</li>
+                        <li>Sistema de autenticación integrado en Laravel.</li>
+                        <li>Personalización del registro y login de usuarios.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Implementar un sistema de autenticación de usuarios con Laravel Auth.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 7: Middleware y Seguridad</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Uso de middleware para controlar el acceso a rutas.</li>
+                        <li>Middleware integrado y creación de middleware personalizado.</li>
+                        <li>Seguridad en Laravel: CSRF, XSS, y protección contra inyecciones SQL.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Implementar middleware para gestionar permisos de usuarios en diferentes rutas.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 8: Envío de Emails y Notificaciones</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Configuración del sistema de correo en Laravel.</li>
+                        <li>Envío de correos electrónicos con Mailables.</li>
+                        <li>Notificaciones en Laravel (email, base de datos, SMS).</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Enviar un email de bienvenida cuando un usuario se registre en la aplicación.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 9: API RESTful con Laravel</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Creación de una API RESTful.</li>
+                        <li>Serialización de datos con Eloquent y respuestas JSON.</li>
+                        <li>Uso de controladores API y rutas protegidas.</li>
+                        <li>Autenticación con Passport o Sanctum.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Crear una API RESTful para gestionar productos y autenticar usuarios.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 10: Testing en Laravel</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Introducción a PHPUnit para pruebas automatizadas.</li>
+                        <li>Pruebas de unidades y pruebas funcionales en Laravel.</li>
+                        <li>Creación de pruebas para controladores, modelos y vistas.</li>
+                        <li>Pruebas de integración y uso de factories.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Escribir pruebas unitarias y funcionales para una pequeña aplicación en Laravel.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 11: Despliegue de Aplicaciones Laravel</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Configuración para entornos de producción.</li>
+                        <li>Despliegue en servidores compartidos y VPS.</li>
+                        <li>Uso de Forge o Vapor para despliegue automatizado.</li>
+                        <li>Configuración de servidores Nginx o Apache para Laravel.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Desplegar una aplicación Laravel en un servidor de pruebas.</p>
+                </div>
+
+                <div class="bg-gray-800/30 rounded-lg p-4">
+                    <h5 class="text-xl font-bold mb-2 code-font text-green-400">Lección 12: Optimización y Buenas Prácticas en Laravel</h5>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Mejores prácticas en estructura de proyectos Laravel.</li>
+                        <li>Optimización de rendimiento: caching, optimización de consultas y compresión de recursos.</li>
+                        <li>Herramientas de debugging y profiling en Laravel.</li>
+                        <li>Seguridad y monitoreo de aplicaciones en producción.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-400"><strong>Práctica:</strong> Optimizar una aplicación Laravel y aplicar técnicas de caché y debugging.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 p-4 bg-gray-800/30 rounded-lg">
+                <h3 class="text-2xl font-bold mb-4 code-font text-green-400">Conclusión</h3>
+                <p class="text-gray-300">Próximamente</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Efecto Matrix (copiar del index.html)
+    </script>
+</body>
+</html>
