@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
         /* Estilos base */
         body {
@@ -103,6 +104,32 @@
         @keyframes border-animate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        #hacker-animation {
+            background: rgba(0, 0, 0, 0.95);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .hacker-text {
+            position: relative;
+            min-height: 20px;
+            min-width: 200px;
+        }
+
+        .hacker-text::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            animation: hackerCursor 1s infinite;
+            color: #10B981;
+        }
+
+        @keyframes hackerCursor {
+            0% { content: '_'; }
+            25% { content: '>'; }
+            50% { content: '|'; }
+            75% { content: '<'; }
         }
     </style>
 </head>
@@ -201,9 +228,14 @@
                             </style>
                         </div>
                     </div>
-                    <a href="https://davcportafolio.vercel.app/" target="_blank" class="btn-cyber inline-block px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-lg hover:from-blue-500 hover:to-green-400 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        Visitar_Portafolio
-                    </a>
+                    <div class="relative">
+                        <a href="https://davcportafolio.vercel.app/" id="portfolio-btn" class="btn-cyber inline-block px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-lg hover:from-blue-500 hover:to-green-400 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            Visitar_Portafolio
+                        </a>
+                        <div id="hacker-animation" class="fixed inset-0 bg-black z-50 hidden flex items-center justify-center">
+                            <div class="text-green-400 code-font text-lg hacker-text"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -322,6 +354,64 @@
         }
 
         setInterval(draw, 33);
+    </script>
+    <script>
+        document.getElementById('portfolio-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetUrl = this.href;
+            const hackerAnimation = document.getElementById('hacker-animation');
+            const hackerText = hackerAnimation.querySelector('.hacker-text');
+
+            // Mostrar la animación
+            hackerAnimation.classList.remove('hidden');
+
+            // Textos para la animación
+            const hackerMessages = [
+                'Iniciando secuencia de hackeo...',
+                'Accediendo a tu dispositivo...',
+                'Desencriptando protocolos...',
+                'Bypasseando firewalls...',
+                'Inyectando código malicioso...',
+                'Acceso concedido...',
+                'Redirigiendo a mi portafolio xd...'
+            ];
+
+            let currentIndex = 0;
+
+            // Animación de texto
+            const textAnimation = anime.timeline({
+                complete: function() {
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 500);
+                }
+            });
+
+            hackerMessages.forEach((message, index) => {
+                textAnimation.add({
+                    targets: '.hacker-text',
+                    innerHTML: [message],
+                    duration: 800,
+                    easing: 'easeInOutQuad',
+                    delay: 200
+                });
+            });
+
+            // Efecto de caracteres aleatorios
+            let glitchInterval = setInterval(() => {
+                const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+                const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                hackerText.innerHTML += randomChar;
+                if (hackerText.innerHTML.length > 50) {
+                    hackerText.innerHTML = hackerText.innerHTML.slice(1);
+                }
+            }, 50);
+
+            // Limpiar el intervalo después de la animación
+            setTimeout(() => {
+                clearInterval(glitchInterval);
+            }, hackerMessages.length * 1000);
+        });
     </script>
 </body>
 </html>
